@@ -2,7 +2,7 @@
 <style>
     input[type=text],
     input[type=email],
-    textarea,
+    textarea
         {
         -moz-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
@@ -14,7 +14,7 @@
     }
 
     input[type=text]:focus,
-    ,
+    
     input[type=email]:focus textarea:focus {
         -moz-box-shadow: 0 0 5px #51cbee;
         -webkit-box-shadow: 0 0 5px #51cbee;

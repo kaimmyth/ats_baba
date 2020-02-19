@@ -210,10 +210,8 @@
 
 												<h3>Skills Required</h3>
 												<hr>
-												<button type="button" class="btn btn-outline-primary">{{@$data->required_skills}}</button>&nbsp;&nbsp;
-														<!-- <button type="button" class="btn btn-outline-primary">react js</button>&nbsp;&nbsp;
-														<button type="button" class="btn btn-outline-primary">HTML</button>&nbsp;&nbsp;
-														<button type="button" class="btn btn-outline-primary">css</button> -->
+												<input type="text" value="{{@$data->required_skills}}" class="form-control" style="width:270px;"/>&nbsp;&nbsp;
+														
 														<hr>
 
 													</div>

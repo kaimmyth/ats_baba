@@ -95,9 +95,9 @@
                              <div class="form-group row">
                                 <label for="address" class="control-label col-lg-4">Group<span style="color:red;">*</span></label>
                                 <select name="group_of_company" id="for_group" class="form-control" style="width:42%; border: 1px solid #bbb8b8;margin-left:9px;">
-                                        <option selected>{{$toReturn['post_job']['for_group']}}</option>
-                                        @foreach($toReturn['team_member_type'] as $team_member)
-                                          <option value="{{$team_member['type_name']}}"> {{$team_member['type_name']}} </option>
+                                        <option selected>{{$toReturn['post_job']['type_ID']}}</option>
+                                        @foreach($toReturn['team_member_type'] as $team_member_type)
+                                          <option value="{{ $team_member_type['type_ID']}}" <?php if($toReturn['post_job']->for_group==$team_member_type['type_ID']){ echo "selected"; } ?>>{{ $team_member_type['type_name']}}</option>
                                         @endforeach
                                </select><br>
                                <span id="group_check"style="margin-left:35%;">Please Select Any Group</span>

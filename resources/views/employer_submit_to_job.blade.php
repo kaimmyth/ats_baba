@@ -573,62 +573,7 @@
             document.getElementById("select_ranage").style.display = "none";
             document.getElementById("select_ranage_other").style.display = "block";
         }
-        // alert(temp);
-        // if (temp == 'Full Time') {
-        //     // alert('gfg');
-        //     var x = document.getElementById("select_ranage").options[1].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[2].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[3].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[4].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[5].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[6].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[7].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[8].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[9].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[10].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[11].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[12].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[13].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[14].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[15].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[16].disabled = true;
-
-        // } else if (temp == 'Contract') {
-        //     // alert('gfg');
-        //     var x = document.getElementById("select_ranage").options[1].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[2].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[3].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[4].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[5].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[6].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[7].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[8].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[9].disabled = true;
-        //     var x = document.getElementById("select_ranage").options[10].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[11].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[12].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[13].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[14].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[15].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[16].disabled = false;
-        // } else {
-        //     var x = document.getElementById("select_ranage").options[1].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[2].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[3].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[4].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[5].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[6].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[7].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[8].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[9].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[10].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[11].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[12].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[13].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[14].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[15].disabled = false;
-        //     var x = document.getElementById("select_ranage").options[16].disabled = false;
-        // }
+        
     }
 </script>
 <script>

@@ -88,7 +88,7 @@
                     <div class="card card-border card-primary">
                         <div class="card-header">
                             <h3 class="card-title text-primary" style="float:left;">Application</h3>
-                            <button class="btn btn-info ml-5" onclick="location.href='{{url('employer/Application')}}';" type="button" style="float:left;" id="button-addon2" title="Show All Application"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                            <button class="btn btn-info ml-5" onclick="location.href= {{url('employer/application')}}" type="button" style="float:left;" id="button-addon2" title="Show All Application"><i class="fa fa-repeat" aria-hidden="true"></i></button>
                             <h6 style="float:right;">
                                 <!--<input id="myInput" type="text" placeholder="Search" style="height: 31px; width: 100%; padding: 13px; border:1px solid #9d9d9d; border-radius: 2px;">-->
                                 <form action="{{url('employer/Application/search_application')}}" method="get">

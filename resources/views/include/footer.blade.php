@@ -73,7 +73,7 @@
             <script src="{{url('plugins/datatables/dataTables.responsive.min.js')}}"></script>
              <script src="{{url('plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
              <script src="{{url('plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js')}}"></script>
-        <script src="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+        <!-- <script src="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script> -->
         <script>
 
             jQuery(document).ready(function(){

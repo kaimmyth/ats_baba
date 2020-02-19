@@ -46,7 +46,7 @@
     }
 
     table.dataTable thead>tr>th {
-        / padding-left: 8px;/ padding-right: 30px;
+         padding-left: 8px;  padding-right: 30px;
     }
 
     .table-bordered th {
@@ -129,7 +129,7 @@
                                                 <th width="5%">Title</th>
                                                 <th width="5%">Client</th>
                                                 <th width="10%">Location</th>
-                                                <th width="5%"># </th>
+                                                <th width="5%">#</th>
                                                 <th width="10%">Type</th>
                                                 <th width="10%">Visa </th>
                                                 <th width="10%">Pay Rate</th>
@@ -180,19 +180,19 @@
                                                     <a href="{{url('employer/posted_job_assined/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a>
                                                     @endif
                                                     @else
-                                                    <a href="{{url('employer/posted_job_assined/'.$id)}}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Asign this job"><i class="fa fa-users"></i></a>
+                                                    <a href="{{url('employer/posted_job_assined/'.$id)}}" class="on-default edit-row" data-placement="top" title="Assign this job" ><i class="fa fa-users"></i></a>
                                                     <a href="{{url('employer/job/edit/'.$id)}}"><i class="fa fa-pencil" title="Edit"></i></a>
                                                     @endif
                                                     @if(!empty($toReturn['user_type']=="teammember"))
                                                     @if($toReturn['current_module_permission']['is_delete']="yes")
-                                                    <a href="{{url('employer/delete/'.$id)}}"><i class="fa fa-trash-o" title="Delete"></i></a>
+                                                    <a href="{{url('employer/delete/'.$id)}}" onclick="return confirm('Are u really want to delete this item?')"><i class="fa fa-trash-o" title="Delete"></i></a>
                                                     @endif
                                                     @else
-                                                    <a href="{{url('employer/delete/'.$id)}}"><i class="fa fa-trash-o" title="Delete"></i></a>
+                                                    <a href="{{url('employer/delete/'.$id)}}" onclick="return confirm('Are u really want to delete this item?')"><i class="fa fa-trash-o" title="Delete"></i></a>
                                                     @endif
                                                     <!-- @if($toReturn['current_module_permission']['is_delete']="yes") -->
                                                     <!-- <a href="{{url(''.$id)}}" data-toggle="modal" data-target="#myModal{{$posted_job['ID']}}" title="Add a candidate"><i class="fa fa-plane" aria-hidden="true"></i></a> -->
-                                                    <a href="javascript:void();"  onclick="showmailModal({{$posted_job['ID']}});"  title="mail"><i class="fa fa-envelope"></i></a>
+                                                    <a href="javascript:void();"  onclick="showmailModal({{$posted_job['ID']}})"  title="mail"><i class="fa fa-envelope"></i></a>
                                                     <a href="javascript:void();" onclick="addjobNotes({{$posted_job['ID']}})" ><i class="fa fa-plus" title="Note"></i></a>
                                                     <!-- @endif -->
                                                     <a href="" data-toggle="modal" onclick="share({{$posted_job['ID']}})" title="share"><i class="fa fa-share"></i></a>
@@ -248,6 +248,7 @@
                             <label for="recipient-name" class="col-form-label"> Candidate Name:</label>
                             <select name="job" id="job" class="form-control" required>
                                 <option value="">Select</option>
+                                
                               
                             </select>
                         </div>
@@ -284,10 +285,11 @@
 
                         <div class="row">
                             <div class="input-group mb-3">
+                          
                                 <input type="hidden" value="" id="job_id" name="job_id">
                                 
-                                <input type="text" class="form-control" placeholder="Notes Title" id="title" aria-label="Recipient's username" name="title" aria-describedby="basic-addon2" required>
-                                <input type="text" class="form-control" placeholder="Enter Notes" id="note" aria-label="Recipient's username" name="note" aria-describedby="basic-addon2" required>
+                                <input type="text" class="form-control" placeholder="Notes Title"  id="title" aria-label="Recipient's username" name="title" aria-describedby="basic-addon2" required>
+                                <input type="text" class="form-control" placeholder="Enter Notes" id="note" maxlength="3" aria-label="Recipient's username" name="note" aria-describedby="basic-addon2" required>
 
                                 <select name="privacy" class="custom-select">
                                     <option value="public">Public
@@ -326,7 +328,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+    $('#title').bind('keyup blur',function(){ 
+        var node = $(this);
+        node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
+    );
     
+    $('#note').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+);
+
+    </script>
     <script>
         var resizefunc = [];
         $(document).ready(function () {
@@ -356,7 +370,7 @@
             });
         }
     </script>
-    <script type="text/javascript">
+  <script type="text/javascript">
 
 
 
@@ -374,8 +388,9 @@
 
                     var value_one = `<table class='table table-striped'>
 										<thead>
+                                           
 											<tr>
-											<th>Job _ID</th>
+											<th>Job_ID</th>
 											<th>Title</th>
 											<th>Note</th>
 											<th>Created By</th>
@@ -386,15 +401,21 @@
 										<tbody>`;
                     $('#append_view').append(value_one);
                     $.each(data, function (index, value) {
-                        var value_two = `<tr>
+                        
+                        
+            var value_three = `<tr>
+                        
 								<td>`+ value.job_id + `</td>
 								<td>`+ value.title + `</td>
 								<td>`+ value.note + `</td>
 								<td>`+ value.created_by + `</td>
 								<td>`+ value.status + `</td>
-								<td>`+ value.privacy_level + `</td>
+								<td>`+ value.privacy_level +`</td>
 							</tr>`;
-                        $('#append_view').append(value_two);
+                           
+                            
+                        $('#append_view').append(value_three);
+                        
 
 
                         // $('#append_view').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
@@ -403,12 +424,13 @@
                     $('#append_view').append("</tbody>");
                     $('#append_view').append("</table>");
                     $('#view').hide();
-
+          
 
 
                 },
                 error: function (data) {
                     console.log(data);
+                    
 
                 }
 
@@ -416,7 +438,7 @@
         }
         
 
-    </script>
+    </script> 
     <script>
     function addjobNotes(id)
     {
@@ -439,7 +461,7 @@ $.ajax({
                 var toAppend="";
                 for(i=0;i<data.length;i++)
                 {
-                    toAppend+=`<option value="`+data[i].ID+`|`+data[i].first_name+ data[i].middle_name+data[i].last_name+`">`+data[i].first_name+" "+ data[i].middle_name+" "+data[i].last_name+`</option>`;
+                  toAppend+=`<option value="`+data[i].ID+`|`+data[i].first_name+ data[i].middle_name+data[i].last_name+`">`+data[i].first_name+" "+ data[i].middle_name+" "+data[i].last_name+`</option>`;
                 }
                 $("#job").append(toAppend);
                 console.log(toAppend);
@@ -454,7 +476,7 @@ $("#mailModal").modal("show");
 
     <script>
         function share(id) {
-            alert('this module work in progress')
+            // alert('this module work in progress')
             $('#exampleModalScrollable').modal();
             $('#id_for_job').val(id);
         }

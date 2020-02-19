@@ -136,7 +136,7 @@
                                 @else
                                 <a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-info" style="float:left;">Add a Candidate</button></a>
                                 @endif
-                                <button class="btn btn-primary ml-5" onclick="location.href='{{url('employer/search_resume')}}';" type="button" title="Show All Candidate" style="float:left;" id="button-addon2"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                                <button class="btn btn-primary ml-5" onclick="{{ url('employer/search_resume')}}" type="button" title="Show All Candidate" style="float:left;" id="button-addon2"><i class="fa fa-repeat" aria-hidden="true"></i></button>
                             </div>
                             <div class="card-body">
                                 <div class="row">
