@@ -79,7 +79,7 @@
                         <div class="col-md-12">
                         <div class="card" style="border: 1px #C0C0C0 solid;">
                             <div class="card-header" style="background-color: #317eeb;">
-		                        <h3 class="card-title" style="color:#fff;text-transform: none; font-size:large">ADD E-MAIL CONTACT LIST</h3></div>
+		                        <h3 class="card-title" style="color:#fff;text-transform: none; font-size:large">ADD E-MAIL CONTACT LIST<a href="{{url('employer/my_posted_contacts')}}"><button type="button" class="btn btn-info" style="float:right">Back</button></a></h3></div>
                                     
 									<div class="card-body">
 									 <!--Salutation-->	
@@ -104,7 +104,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4"> First Name<span style="color:red;">*</span></label>
 											<div class="col-lg-8">
-												<input type="text" id="" name="firstname" placeholder="First Name" type="number--" required>
+												<input type="text" id="" name="firstname" placeholder="First Name" type="number--" required maxlength="15">
 											</div>
 									  </div>
 								<!--end of Name-->
@@ -112,7 +112,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4"> Last Name </label>
 											<div class="col-lg-8">
-												<input type="text" id="" name="lastname" placeholder="Last Name" type="number--" >
+												<input type="text" id="" name="lastname" placeholder="Last Name" type="number--" maxlength="15">
 											</div>
 									  </div>
 								<!--end of Last Name-->
@@ -120,7 +120,7 @@
 									<div class="form-group row">
 										<label for="" class="control-label col-lg-4"> Full Name </label>
 											<div class="col-lg-8">
-													<input type="text" id="" name="fullname" placeholder="Full Name" type="number--" >
+													<input type="text" id="" name="fullname" placeholder="Full Name" type="number--" maxlength="15">
 											</div>
 									  </div>
 								<!--end of Full Name-->

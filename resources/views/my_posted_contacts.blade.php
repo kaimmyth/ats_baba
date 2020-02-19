@@ -323,11 +323,11 @@ table.dataTable thead > tr > th {
                                                             @if(!empty($toReturn['user_type']=="teammember")) 
 
 															@if($toReturn['current_module_permission']['is_add']=="yes")
-                                                       	<a href="{{url('uploadcsv')}}"><button type="button" class="btn btn-success" style="float: right;">Import Email Contact</button></a>
+                                                       	<!-- <a href="{{url('uploadcsv')}}"><button type="button" class="btn btn-success" style="float: right;">Import Email Contact</button></a> -->
 														<a href="{{url('employer/post_new_email_contact/show')}}"><button type="button" class="btn btn-success" style="float: right; margin-right: 1em;">Add an Email Contact</button></a>
 														@endif
 														@else
-														<a href="{{url('uploadcsv')}}"><button type="button" class="btn btn-success" style="float: right;">Import Email Contact</button></a>
+														<!-- <a href="{{url('uploadcsv')}}"><button type="button" class="btn btn-success" style="float: right;">Import Email Contact</button></a> -->
 														<a href="{{url('employer/post_new_email_contact/show')}}"><button type="button" class="btn btn-success" style="float: right; margin-right: 1em;">Add an Email Contact</button></a>
 														@endif
                                                     </div>
