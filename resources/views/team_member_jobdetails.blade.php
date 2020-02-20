@@ -53,6 +53,7 @@
 		vertical-align: bottom;
 		border-bottom: 0.5px solid #000;
 	}
+	
 	.table-bordered thead td, .table-bordered thead th {
 		border-bottom-width: 1px;
 	}
@@ -63,7 +64,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xl-12">
-						<ul class="nav nav-tabs nav-justified" role="tablist" style="background: #317eeb;">
+						<ul class="nav nav-tabs nav-justified" role="tablist">
 
 							<li class="nav-item">
 								<a class="nav-link active" id="home-tab-1" data-toggle="tab" href="#home-1" role="tab" aria-controls="home-1" aria-selected="false">
@@ -71,23 +72,23 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" id="profile-tab-1" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile-1" aria-selected="true">
+								<a class="nav-link" id="profile-tab-1" style="margin-right:5%;" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile-1" aria-selected="true">
 									<span class="d-none d-sm-block">Potential Matches</span>
 								</a>
 							</li>
 
 							<li class="nav-item">
-								<a class="nav-link" id="message-tab-1" data-toggle="tab" href="#message-1" role="tab" aria-controls="message-1" aria-selected="false">
+								<a class="nav-link" id="message-tab-1" style="margin-right:5%;" data-toggle="tab" href="#message-1" role="tab" aria-controls="message-1" aria-selected="true">
 									<span class="d-none d-sm-block">Application</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" id="setting-tab-1" data-toggle="tab" href="#setting-1" role="tab" aria-controls="setting-1" aria-selected="false">
-									<span class="d-none d-sm-block">Client Submittals</span>
+								<a class="nav-link" id="setting-tab-1" style="margin-right:5%;" data-toggle="tab" href="#setting-1" role="tab" aria-controls="setting-1" aria-selected="true">
+									<span class="d-none d-sm-block">Client Submittal</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" id="setting-tab-1" data-toggle="tab" href="#finish-1" role="tab" aria-controls="setting-1" aria-selected="false">
+								<a class="nav-link" id="setting-tab-1" style="margin-right:5%;" data-toggle="tab" href="#finish-1" role="tab" aria-controls="setting-1" aria-selected="true">
 									<span class="d-none d-sm-block">History</span>
 								</a>
 							</li>
@@ -328,18 +329,19 @@
 										<div class="tab-pane" id="setting-1" role="tabpanel" aria-labelledby="setting-tab-1">
 											<div class="row">
 												<div class="col-md-12 col-sm-12 col-12">
-													<table id="datatable-fixed-header" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+													<table id="datatable-header" class="table table-striped table-bordered dt-responsive nowrap skilled" style="border-collapse:collapse; border-spacing:0; width:100%; overflow-y:scroll; 
+													position:relative;">
 														<thead>
 
 															<tr>
 																<th>Submittal Date</th>
 																<th>Job Code</th>
-																<th>Job Title</th>
+																<th rowspan="1">Job Title</th>
 																<th>Job TYPE</th>
 																<th>Location</th>
 																<th>Required Skills</th>
 																<th>Candidate Name</th>
-																<th>Mobile</th>
+																<th style="width:30px;">Mobile</th>
 																<th>Email</th>
 																<th>Visa</th>
 																<th>Qualification</th>

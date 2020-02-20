@@ -432,10 +432,13 @@ public function view_education($id="")
     }
     public function update_resume(Request $Request)
     {
-        $upload_cv=$Request->file('Upload_cv');
-         $file_name=$upload_cv->getClientOriginalName();
-         $upload_cv->move(public_path('seekerresume'), $file_name);
-        Tbl_job_seekers::where('ID',$Request->seeker_id)->update(array('cv_file'=>$file_name));
+        if($Request->file('Upload_cv'))
+        {
+            $upload_cv=$Request->file('Upload_cv');
+            $file_name=$upload_cv->getClientOriginalName();
+            $upload_cv->move(public_path('seekerresume'), $file_name);
+            Tbl_job_seekers::where('ID',$Request->seeker_id)->update(array('cv_file'=>$file_name));
+        }
         return redirect('employer/candidate/'.$Request->seeker_id); 
     }
 

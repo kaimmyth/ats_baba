@@ -114,7 +114,6 @@
         height: 60vh;
     }
 
-    body {}
 
     .panel-footer {
         padding: 5px 15px;
@@ -312,7 +311,7 @@
                                                                     <a href="{{url('employer/dashboard/interview-meeting-intdel'.$ida)}}"
                                                                         class="on-default edit-row"
                                                                         data-toggle="tooltip" data-placement="top"
-                                                                        title="" data-original-title="delete"><i
+                                                                        title="" data-original-title="delete" onclick="return confirm('Are u sure you want to delete this item?')"><i
                                                                             class="fa fa-trash-o"></i></a>
 
                                                                 </td>
@@ -406,7 +405,7 @@
                                                                         title="delete"
                                                                         class="hidden on-editing login-row"
                                                                         data-toggle="tooltip" data-placement="top"
-                                                                        data-original-title="delete"><i
+                                                                        data-original-title="delete" onclick="return confirm('Are u sure you want to delete this item?')"><i
                                                                             class="fa fa-trash-o"></i></a>
                                                                             
                                                                 </td>
@@ -483,11 +482,11 @@
                                                                 }
                                                                 $date_val = date('m-d-Y', strtotime(@$get_time_zone->start_date))
                                                                 ?>
-                                                                <td style="padding:6px;">{{$job->job_title}}</td>
-                                                                <td style="padding:6px;">{{$job_seeker->email}}</td>
-                                                                <td style="padding:6px;">{{$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
+                                                                <td style="padding:6px;">{{@$job->job_title}}</td>
+                                                                <td style="padding:6px;">{{@$job_seeker->email}}</td>
+                                                                <td style="padding:6px;">{{@$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
                                                                 <td style="padding:6px;">{{@$result}}</td>
-                                                                <td style="padding:6px;">{{$date_val}}</td>
+                                                                <td style="padding:6px;">{{@$date_val}}</td>
                                                                 <td style="padding:6px;">{{@$get_time_zone->time_zone}}</td>
                                                                 
                                                                 
@@ -507,7 +506,7 @@
                                                                         title="delete"
                                                                         class="hidden on-editing login-row"
                                                                         data-toggle="tooltip" data-placement="top"
-                                                                        data-original-title="delete"><i
+                                                                        data-original-title="delete" onclick="return confirm('Are u sure you want to delete this item?')"><i
                                                                             class="fa fa-trash-o"></i></a>
                                                                 </td> --}}
                                                             </tr>
@@ -566,7 +565,7 @@
 
                                                             <tr>
                                                                 <?php 
-                                                                $id = $i->id;
+                                                                //$id = $i->id;
                                                                 // $date_application1 = $i->meeting_date;
                                                                 // $new_date1 = date("m-d-Y", strtotime($date_application1));
                                                                 $get_time_zone = DB::table('tbl_interview_mail')->where('id',$i->tbl_interview_mail_id)->first();
@@ -585,11 +584,11 @@
                                                                 }
                                                                 $date_val = date('m-d-Y', strtotime(@$get_time_zone->start_date))
                                                                 ?>
-                                                                <td style="padding:6px;">{{$job->job_title}}</td>
-                                                                <td style="padding:6px;">{{$job_seeker->email}}</td>
-                                                                <td style="padding:6px;">{{$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
+                                                                <td style="padding:6px;">{{@$job->job_title}}</td>
+                                                                <td style="padding:6px;">{{@$job_seeker->email}}</td>
+                                                                <td style="padding:6px;">{{@$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
                                                                 <td style="padding:6px;">{{@$result}}</td>
-                                                                <td style="padding:6px;">{{$date_val}}</td>
+                                                                <td style="padding:6px;">{{@$date_val}}</td>
                                                                 <td style="padding:6px;">{{@$get_time_zone->time_zone}}</td>
                                                                 
                                                                 
@@ -609,7 +608,7 @@
                                                                         title="delete"
                                                                         class="hidden on-editing login-row"
                                                                         data-toggle="tooltip" data-placement="top"
-                                                                        data-original-title="delete"><i
+                                                                        data-original-title="delete" onclick="return confirm('Are u sure you want to delete this item?')"><i
                                                                             class="fa fa-trash-o"></i></a>
                                                                 </td> --}}
                                                             </tr>
@@ -687,11 +686,11 @@
                                                                 }
                                                                 $date_val = date('m-d-Y', strtotime(@$get_time_zone->start_date))
                                                                 ?>
-                                                                <td style="padding:6px;">{{$job->job_title}}</td>
-                                                                <td style="padding:6px;">{{$job_seeker->email}}</td>
-                                                                <td style="padding:6px;">{{$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
+                                                                <td style="padding:6px;">{{@$job->job_title}}</td>
+                                                                <td style="padding:6px;">{{@$job_seeker->email}}</td>
+                                                                <td style="padding:6px;">{{@$job_seeker->first_name}} {{$job_seeker->middle_name}} {{$job_seeker->last_name}}</td>
                                                                 <td style="padding:6px;">{{@$result}}</td>
-                                                                <td style="padding:6px;">{{$date_val}}</td>
+                                                                <td style="padding:6px;">{{@$date_val}}</td>
                                                                 <td style="padding:6px;">{{@$get_time_zone->time_zone}}</td>
                                                                 
                                                                 
@@ -711,7 +710,7 @@
                                                                         title="delete"
                                                                         class="hidden on-editing login-row"
                                                                         data-toggle="tooltip" data-placement="top"
-                                                                        data-original-title="delete"><i
+                                                                        data-original-title="delete" onclick="return confirm('Are u sure you want to delete this item?')"><i
                                                                             class="fa fa-trash-o"></i></a>
                                                                 </td> --}}
                                                             </tr>

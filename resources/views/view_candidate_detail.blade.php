@@ -85,7 +85,7 @@
     }
 
     input[type=text],
-    textarea,
+    textarea
         {
         -moz-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
@@ -128,7 +128,7 @@
                                 CV Manager<a href="#" id="select_doc" style="color:#fff; float:right; margin-left:10em;">Upload File <i class="fa fa-upload" style="font-size:20px;color:#fff;"></i> </a>
                                 <input type="file" id="Upload_cv" name="Upload_cv" style="display:none;">
                                 <input type="hidden" name="seeker_id" value="{{$toReturn['job_seeker']['ID']}}">
-                                <input type="submit" name="seeker_resume" value="Update" class="btn btn-primary">
+                               <input type="submit"  onclick="return appers();" name="seeker_resume" id="seeker_update" value="Update" class="btn btn-primary">
                             </h3>
                         </form>
                     </div>
@@ -163,7 +163,7 @@
                         <div class="col-md-6" style="float:left;">
                             <!-- <form method="post" id="upload_form" action="{{url('jobseeker/edit_jobseeker/upload_photo')}}" enctype="multipart/form-data">
 									<i class="fa fa-user"></i>
-									<!--<img src="{{URL::asset('public/profile_pic/'.$toReturn['job_seeker']['photo'])}}" height="100" width="100">
+									<img src="{{URL::asset('public/profile_pic/'.$toReturn['job_seeker']['photo'])}}" height="100" width="100">
 										<i class="fa fa-upload" style="margin-top:15%;color:#1ba6df"></i>
 								       <a href="#" id="select_image">Upload File</a> <input type="file" id="Upload_image" name="Upload_image" style="display:none;">
 								</form> -->
@@ -239,7 +239,7 @@
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>City</th>
-                                    <th>country</th>
+                                    <th>Country</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -316,7 +316,7 @@
                             <thead>
                                 <tr>
                                     <th>Degree Title</th>
-                                    <th>major</th>
+                                    <th>Major</th>
                                     <th>Institude</th>
                                     <th>Country</th>
                                     <th>City</th>
@@ -706,8 +706,17 @@
 </script>
 
 
+<script>
+$("#seeker_update").click(function(){
+    appers();
 
-
+if($Upload_cv == ""){
+    alert("please select upload file");
+}  else {
+alert("select file");
+ }
+});
+</script>
 
 
 <script>
