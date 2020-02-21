@@ -49,6 +49,11 @@
          padding-left: 8px;  padding-right: 30px;
     }
 
+table.tbody>tr>td {
+
+    padding-left:8px; 
+    padding-bottom:8px;
+}
     .table-bordered th {
         border-top: 4px solid #f5f5f5 !important;
         border-bottom: 4px solid #f5f5f5 !important;
@@ -78,6 +83,10 @@
         color: #fff;
     }
 
+#job_table{
+width:60%;
+
+}
     .page-link {
         position: relative;
         display: block;
@@ -129,7 +138,7 @@
                                                 <th width="5%">Title</th>
                                                 <th width="5%">Client</th>
                                                 <th width="10%">Location</th>
-                                                <th width="5%">#</th>
+                                                <th width="5%">Duration</th>
                                                 <th width="10%">Type</th>
                                                 <th width="10%">Visa </th>
                                                 <th width="10%">Pay Rate</th>
@@ -335,10 +344,10 @@
         node.val(node.val().replace(/[^A-Za-z_\s]/,'') ); }   // (/[^a-z]/g,''
     );
     
-    $('#note').bind('keyup blur',function(){ 
-    var node = $(this);
-    node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
-);
+//     $('#note').bind('keyup blur',function(){ 
+//     var node = $(this);
+//     node.val(node.val().replace(/[^0-9]/,'') ); }   // (/[^a-z]/g,''
+// );
 
     </script>
     <script>
@@ -398,12 +407,12 @@
 											<th>Privacy</th>
 											</tr>
 										</thead>
-										<tbody>`;
+										<tbody >`;
                     $('#append_view').append(value_one);
                     $.each(data, function (index, value) {
                         
                         
-            var value_three = `<tr>
+            var value_three = `<tr id="job_table">
                         
 								<td>`+ value.job_id + `</td>
 								<td>`+ value.title + `</td>
@@ -413,25 +422,17 @@
 								<td>`+ value.privacy_level +`</td>
 							</tr>`;
                            
-                            
-                        $('#append_view').append(value_three);
+                            $('#append_view').append(value_three);
                         
-
-
-                        // $('#append_view').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
-
-                    });
+                            // $('#append_view').append("<option value="+'"'+value.state_id+'"'+"selected>"+value.state_name+"</option>");
+                        });
+                        
                     $('#append_view').append("</tbody>");
                     $('#append_view').append("</table>");
                     $('#view').hide();
-          
-
-
-                },
+                  },
                 error: function (data) {
                     console.log(data);
-                    
-
                 }
 
             });

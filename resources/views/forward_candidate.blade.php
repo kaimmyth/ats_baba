@@ -2,7 +2,7 @@
 <style>
     input[type=text],
     input[type=email],
-    textarea,
+    textarea
         {
         -moz-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
@@ -14,7 +14,7 @@
     }
 
     input[type=text]:focus,
-    ,
+    
     input[type=email]:focus textarea:focus {
         -moz-box-shadow: 0 0 5px #51cbee;
         -webkit-box-shadow: 0 0 5px #51cbee;
@@ -414,10 +414,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                        <div align="center">
+                                        <div  style="padding-left:44%;">
                                             <input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required"> &nbsp;&nbsp;&nbsp; Experience Required ?
 
-                                            <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                            <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead style="    background: #317eeb;">
                                                     <tr>
                                                         <th colspan="5">Experiences</th>
@@ -464,10 +464,10 @@
                                             </table>
                                         </div>
                                         <hr>
-                                        <div align="center">
+                                        <div  style="padding-left:44%;"> 
                                             <input type="checkbox" onclick="javascript:showTable('ref_required','ref_table');" id="ref_required" name="ref_required" value="ref_required"> &nbsp;&nbsp;&nbsp; Reference Required ?
 
-                                            <table class="table" style="display:none;" id="ref_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                            <table class="table" style="display:none;" id="ref_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
                                                         <th colspan="5">References</th>
@@ -525,9 +525,9 @@
                                             </table>
                                         </div>
                                         <hr>
-                                        <div align="center">
-                                            <input type="checkbox"   onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
-                                            <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                        <div style="padding-left:44%;">
+                                            <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                            <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
                                                         <th colspan="5">Employer Details</th>
@@ -548,12 +548,12 @@
                                                         <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  value="{{@$toReturn['application_emp_details']->phone_number}}"  ></td>
                                                         <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"   value="{{@$toReturn['application_emp_details']->ext_no}}" ></td>
                                                     </tr>
-                                                    <p id="phone_mess" style="color:red;display:none;"> Please Enter Only Number</p>
+                                                    <!-- <p id="phone_mess" style="color:red;display:none;"> Please Enter Only Number</p> -->
                                                 </tbody>
                                             </table>
                                         </div>
                                         <hr>
-                                        <div align="center">
+                                        <div  style="padding-left:44%;">
                                             <input type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="attachment_required" id="attachment_required" value="attachment_required"> &nbsp;&nbsp;&nbsp; Attachment Required ?
                                             <table class="table" style="display:none;" id="attach_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead>

@@ -263,7 +263,7 @@
                                         <div align="center">
                                             <input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required">  &nbsp;&nbsp;&nbsp; Experience Required ?
 
-                                            <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                            <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead style="    background: #317eeb;">
                                                     <tr>
                                                         <th colspan="5">Experiences</th>
@@ -330,9 +330,9 @@
                                         </div>
                                         <hr>
                                         <div align="center">
-                                            <input type="checkbox" onclick="javascript:showTable('ref_required','ref_table');" id="ref_required" name="ref_required" value="ref_required"> &nbsp;&nbsp;&nbsp; Reference Required ?
+                                            <input type="checkbox" onclick="javascript:showTable('ref_required','ref_table');" id="ref_required" name="ref_required" value="ref_required"> &nbsp;&nbsp;&nbsp;Reference Required ?
 
-                                            <table class="table" style="display:none;" id="ref_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                            <table class="table" style="display:none;" id="ref_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
                                                         <th colspan="5">References</th>
@@ -409,9 +409,9 @@
                                     </div>
                                     </div>
                                     <hr>
-                                    <div align="center">
-                                        <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
-                                        <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                    <div style="padding-left:45%;">
+                                        <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required">&nbsp;&nbsp;&nbsp;Employer Required ?
+                                        <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                             <thead>
                                                 <tr style="background: #317eeb;">
                                                     <th colspan="5">Employer Details</th>
@@ -426,10 +426,10 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="Companyemp_detail"  class="form-control" id="first_name" placeholder="Company name" />
+                                                    <td><input type="text" name="Companyemp_detail"  class="form-control" id="first_name" placeholder="Company name"/>
                                                     <p id="first_name_val"></p></td>
                                                     <td><input type="email" name="Emailemp_detail" class="form-control"  placeholder="EmailId"/></td>
-                                                    <td><input type="text" name="Employeremp_detail" id="last_name"  class="form-control" placeholder="Empolyer Name"  />
+                                                    <td><input type="text" name="Employeremp_detail" id="last_name"  class="form-control" placeholder="Empolyer Name"/>
                                                     <p id="last_name_val"></p></td>
                                                     <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  ></td>
                                                     <td><input type="text" name="extenson" id="extenson" maxlength="4" class="form-control" placeholder="Extention"  ></td>
@@ -440,8 +440,8 @@
                                     </div>
                                     <hr>
                                     <div align="center">
-                                            <input type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="attachment_required" id="attachment_required" value="attachment_required"> &nbsp;&nbsp;&nbsp; Attachment Required ?
-                                            <table class="table" style="display:none;" id="attach_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
+                                            <input type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="attachment_required" id="attachment_required" value="attachment_required"> &nbsp;&nbsp;&nbsp;Attachment Required ?
+                                            <table class="table" style="display:none;" id="attach_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
                                                         <th colspan="5">Attachments</th>
@@ -480,7 +480,7 @@
                                                     @endif
                                                     <tr id="exp_detail">
                                                         <td class="form-group row delete_exp">
-                                                            <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width: 40%;"><p id="document_name_val"></p>
+                                                            <input type="text" name="document_name[]" id="job_title" placeholder="Document Name" style="width:40%;"><p id="document_name_val"></p>
                                                             <input type="file" class="form-control" name="document_upload[]" id="document_upload" class="form-control" style="width: 40%;">
                                                             <p><button type="button" id="btnAdd_Exp" class="btn btn-primary">Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></p>
                                                         </td>
@@ -489,8 +489,7 @@
                                             </table>
                                         </div>
                                     <hr>
-                               
-                                <div class="buttons"><br>
+                                    <div class="buttons"><br>
                                     <center><button type="button" onclick="sub_btn()" 
                                          id="submit_btn" class="btn btn-info button">Submit</button></center>
                                      <center><button type="submit" id="btn_sub" class="btn btn-info"
