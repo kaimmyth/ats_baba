@@ -553,3 +553,11 @@ Route::get('employer/search_resume/search_candidate', 'Job_Employer_Controller@c
 //search for submit candidate to job
 Route::get('employer/submit_candidate_detail/submit_candidate_job_search/new', 'Job_Employer_Controller@submit_candidate_job_search');
 Route::get('export/excel','Import_Controller@export_excel');
+
+
+// Update Report Section
+Route::get('employer/all_report','EmployerReportController@show_report_view');
+Route::post('genrate/report','EmployerReportController@genrate_report');
+Route::get('employer/report/get_team_details/{type_id}','EmployerReportController@get_team_details');
+Route::get('employer/report/get_team_member_details/{team_id}','EmployerReportController@get_team_member_details');
+Route::get('employer/report/get_date/{status}','EmployerReportController@get_date');

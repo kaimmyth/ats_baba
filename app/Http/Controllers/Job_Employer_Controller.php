@@ -286,22 +286,19 @@ class Job_Employer_Controller extends Controller
         $job_id = $Add_to_post_job->id;
         $job_code = $Add_to_post_job->job_code;
         $country_names_array=$request->country_name;
-         
+        //  return $country_names_array;
+         if($country_names_array!=""){
             foreach($country_names_array as $key => $value){
-            
-
-               if($country_names_array!=""){
                        $job_location = new tbl_job_location();
                        $job_location->job_id         =$job_id;
                        $job_location->employer_id    = Session::get('id');
                        $job_location->owner_name     = $request->owner_name;
                        $job_location->org_id         = Session::get('org_ID');
-                       $job_location->country        = $request->country_name[$key];
-                       $job_location->state          = $request->state_name[$key];
-                       $job_location->city           = $request->city_name[$key];
-
+                       $job_location->country        = $request->country_name[$key] ?? "";
+                       $job_location->state          = $request->state_name[$key] ?? "";
+                       $job_location->city           = $request->city_name[$key]??"";
                        $job_location->save();
-            }
+                }
         
             }
             
@@ -438,28 +435,28 @@ class Job_Employer_Controller extends Controller
 
             $post_job = tbl_post_jobs::where('ID', $id)->update($job_detail);
 
-                
-        //     $country_names_array=$Request->country_name;
-        //     return $country_names_array;
-        //                    if($country_names_array!=""){
-         
-        //     foreach($country_names_array as $key => $value){
-            
-        //     $job_location =  tbl_job_location::where('job_id',$Request->$id)->update(array(
-        //             //    job_id         =$job_id;
-        //         'employer_id'    => Session::get('id'),
-        //         'owner_name'     => $Request->owner_name,
-        //         'org_id'         => Session::get('org_ID'),
-        //         'country'        => $Request->country_name[$key],
-        //         'state'          => $Request->state_name[$key],
-        //         'city'           => $Request->city_name[$key],
-
-                      
-
-        //        ));
-        //     }
-        // exit;
-        //     }
+            $country_names_array=$Request->country_name;
+            $delete_joblocation_array=tbl_job_location::where('job_id',$Request->id)->get();// Search Record For delete
+            if($delete_joblocation_array!="")
+            {
+                foreach($delete_joblocation_array as $key_delete=>$value_delete)
+                {
+                    tbl_job_location::where('id',$delete_joblocation_array[$key_delete]['id'])->delete();// Deleteing Exiting Record 
+                }
+            }
+            if($country_names_array!=""){
+            foreach($country_names_array as $key => $value){
+                $job_location = new tbl_job_location();// Inserting New Country Record
+                $job_location->job_id         =$Request->id;
+                $job_location->employer_id    = Session::get('id');
+                $job_location->owner_name     = $Request->owner_name;
+                $job_location->org_id         = Session::get('org_ID');
+                $job_location->country        = $Request->country_name[$key] ?? "";
+                $job_location->state          = $Request->state_name[$key] ?? "";
+                $job_location->city           = $Request->city_name[$key]??"";
+                $job_location->save();
+            }
+            }
             
             
         $Notification = new Tbl_notification();

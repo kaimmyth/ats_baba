@@ -241,15 +241,12 @@
                          <!-- col 2-->
                          <div class="col-lg-6 col-md-6 col-sm-6">
                               <!--location-->
-                               <div class="form-group row" style="background-color:;">
+                               <div class="form-group row" >
                                     <label for="address" class="control-label col-lg-4">Location <span style="color:red;">*</span></label>
                                     <select name="country" id="country"  class="form-control"  style="width:22%; border: 1px solid #bbb8b8; margin-left: 9px;" required>
-                                            @foreach ($toReturn['country'] as $item)
-                                            <option value="{{$item['country_id']}}" selected>{{$item['country_name']}}</option>
-                                            @endforeach
-                                            @foreach($toReturn['countries'] as $country)
-                                    <option value="{{$country['country_id']}}">{{ $country['country_name'] }}</option>
-                                      @endforeach  
+                                        @foreach($toReturn['countries'] as $country)
+                                        <option value="{{$country['country_id']}}" @if(244==$country['country_id']) {{"selected"}} @endif  >{{ $country['country_name'] }}</option>
+                                        @endforeach
                                     </select>
 
 
@@ -285,10 +282,14 @@
                                         <div class="" style="padding:5px 15px; border:1px solid #bbb8b8;border-radius:3px; margin-bottom:10px;">
                                             <table class="" style="width:100%;">
                                                <tbody id="exp_detail">
+                                                   @if(count($toReturn['job_location'])!=0)
                                                     @foreach($toReturn['job_location'] as $key_location => $value_location) 
                                                   <tr>
                                                  <td width="160px">
                                                      <select name="country_name[]" class="form-control country_ids" placeholder="" style="width: 100%; border: 1px solid #bbb8b8;">
+                                                        @foreach($toReturn['countries'] as $country)
+                                                        <option value="{{$country['country_id']}}" @if(244==$country['country_id']) {{"selected"}} @endif  @if($value_location->country==$country['country_id']) {{"selected"}} @endif>{{ $country['country_name'] }}</option>
+                                                        @endforeach
                                                         @foreach ($toReturn['country'] as $item)
                                                         <option value="{{$item['country_id']}}" selected>{{$item['country_name']}}</option>
                                                         @endforeach
@@ -325,6 +326,7 @@
                                                        <tbody>
                                                           <tr>
                                                         @endforeach
+                                                        @endif
                                                            <td colspan="4" style="text-align: left;"><button type="button" id="btnAdd_Exp" class="btn btn-primary" >Add More&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button></td>
                                                             </tr>
                                                            </tbody>
