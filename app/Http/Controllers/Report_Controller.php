@@ -191,8 +191,6 @@ class Report_Controller extends Controller
         $date_2=$request->two_new;
         $data['one1']=$date_1;
         $data['two2']=$date_2;
-
-
         $data['job_created_days']= count(tbl_post_job::where('dated','<=', $date_2)
                                             ->where('dated','>=',$date_1)
                                             ->get());
@@ -374,7 +372,66 @@ class Report_Controller extends Controller
     }
 
 
-   
+   public function group_daily_report($date="")
+   {
+       $date=str_replace("_","-",$date);
+       $team_member=Tbl_team_member_type::get()->toArray();
+       $group_report=array();
+       foreach($team_member as $key_team=>$value_team)
+          {
+       $group_report[$value_team['type_name']]["seeker"]=tbl_team_member_type::leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
+                                                                    ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
+                                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
+                                                                    ->select(
+                                                                        'tbl_job_seekers.ID',
+                                                                        'tbl_job_seekers.dated',
+                                                                        'tbl_job_seekers.dated',
+                                                                        'tbl_job_seekers.employer_id',
+                                                                        'tbl_team_member.full_name',
+                                                                        'tbl_team_member.team_member_type',
+                                                                        'tbl_team_member_type.type_ID',
+                                                                        'tbl_team_member_type.type_name',
+                                                                        'tbl_team_member.company_id',
+                                                                        'tbl_job_seekers.org_id'
+                                                                        )
+                                                                    ->where('tbl_job_seekers.org_id',Session::get('org_ID'))
+                                                                    ->whereDate('tbl_job_seekers.dated',$date)
+                                                                    ->where('tbl_team_member_type.type_ID',$value_team['type_ID'])
+                                                                    ->get()->count();
+$group_report[$value_team['type_name']]["seeker"]=tbl_team_member_type::leftjoin('tbl_team_member','tbl_team_member.team_member_type','=','tbl_team_member_type.type_ID')
+                                                                    ->leftjoin('user','user.user_id','=','tbl_team_member.ID')  
+                                                                    ->leftjoin('tbl_job_seekers','tbl_job_seekers.employer_id','=','user.user_id')  
+                                                                    ->select(
+                                                                        'tbl_job_seekers.ID',
+                                                                        'tbl_job_seekers.dated',
+                                                                        'tbl_job_seekers.dated',
+                                                                        'tbl_job_seekers.employer_id',
+                                                                        'tbl_team_member.full_name',
+                                                                        'tbl_team_member.team_member_type',
+                                                                        'tbl_team_member_type.type_ID',
+                                                                        'tbl_team_member_type.type_name',
+                                                                        'tbl_team_member.company_id',
+                                                                        'tbl_job_seekers.org_id'
+                                                                        )
+                                                                    ->where('tbl_job_seekers.org_id',Session::get('org_ID'))
+                                                                    ->whereDate('tbl_job_seekers.dated',$date)
+                                                                    ->where('tbl_team_member_type.type_ID',$value_team['type_ID'])
+                                                                    ->get()->count();
+          }
+    //    foreach($team_member as $key_team=>$value_team)
+    //    {
+    //    $date_team['post_assign']=tbl_team_member::leftjoin('tbl_job_post_assign','tbl_job_post_assign.team_member_id','=','tbl_team_member.ID')     
+    //    ->leftjoin('tbl_team_member_type','tbl_team_member_type.type_ID','=','tbl_team_member.team_member_type')  
+    //    ->select('tbl_team_member.team_member_type','tbl_team_member.company_id','tbl_team_member.full_name',
+    //    'tbl_job_post_assign.team_member_id','tbl_team_member_type.type_name','tbl_team_member_type.type_ID',
+    //    'tbl_job_post_assign.job_assigned_date','tbl_team_member.company_id','tbl_job_post_assign.org_id')
+    //    ->where('tbl_job_post_assign.org_id',Session::get('org_ID'))
+    //    ->get();
+    //    }
+    return $group_report;
+    //    return $date_team['create_candidate'][0];
+    //    return ["date"=>$date,"team_member"=>$team_member];
+   }
 
 
 

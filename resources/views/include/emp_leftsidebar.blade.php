@@ -18,7 +18,7 @@ $name=Session::get('full_name');
                 <li class="has_sub">
                     <a href="#" class="waves-effect subdrop"><i class="md md-book"></i><span><span> Reports</span><span class="pull-right"><i class="md md-remove"></i></span></a>
                     <ul class="list-unstyled" style="display: block;">
-                        <li><a href="{{url('employer/report')}}"><i class="md md-bookmark"></i>View Report</a></li>
+                        <li><a href="{{url('employer/all_report')}}"><i class="md md-bookmark"></i>View Report</a></li>
                         <li><a href="{{url('employer/manageteammember/team_members_view/send_report/'.$id.'/'.$name)}}"><i class="md md-bookmark"></i>Send Report</a></li>
                         <li><a href="{{url('employer/dashboard/report_graph')}}"><i class="md md-bookmark"></i>Graph Report</a></li>
                         @if(Session::get('type') !== 'teammember')

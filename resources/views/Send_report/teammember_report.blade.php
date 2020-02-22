@@ -219,7 +219,8 @@
                                                                         <?php $username=$name;
                                                                             $user_id=$data_id; 
                                                                         ?>
-                                                                    <td><a href="{{url('team_members_view/excelexport/daily')}}/{{$data_id}}/{{$name}}/{{$item['week_date']}}"> <span></span> Export In Excel</a></td>
+                                                                        <td><a href="{{url('team_members_view/excelexport/daily')}}?data_id={{$data_id}}&name={{$name}}&week_date={{$item['week_date']}}"> <span></span> Export In Excel</a></td>
+                                                                    <!-- <td><a href="{{url('team_members_view/excelexport/daily')}}/{{$data_id}}/{{$name}}/{{$item['week_date']}}"> <span></span> Export In Excel</a></td> -->
 
                                                                 </tr>
 
@@ -316,7 +317,9 @@
                                                                     <?php $username=$name;
                                                                             $user_id=$data_id; 
                                                                         ?>
-                                                                    <td><a href="{{url('team_members_view/excelexport/montly')}}/{{$data_id}}/{{$name}}/{{$item['month_week_one1']}}"> <span></span> Export In Excel</a></td>
+                                                                        <td><a href="{{url('team_members_view/excelexport/montly')}}?data_id={{$data_id}}&name={{$name}}&week_date={{$item['month_week_one1']}}"> <span></span> Export In Excel</a></td>
+
+                                                                    <!-- <td><a href="{{url('team_members_view/excelexport/montly')}}/{{$data_id}}/{{$name}}/{{$item['month_week_one1']}}"> <span></span> Export In Excel</a></td> -->
 
                                                                 </tr>
 

@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Unisharp\ckeditor\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
         
         // PhpSpreadsheet\PhpSpreadsheet\Spreadsheet::class,
         
@@ -233,6 +235,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel'=> Maatwebsite\Excel\Facades\Excel::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
         
        
 

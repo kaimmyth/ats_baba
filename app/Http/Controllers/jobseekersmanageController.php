@@ -11,6 +11,10 @@ use App\states;
 use App\tbl_post_jobs;
 use App\Tbl_seeker_applied_for_job;
 use DB;
+use Yajra\DataTables\Facades\DataTables;
+use Yajra\Datatables\Services\DataTable;
+
+
 use Session;
 
 class jobseekersmanageController extends Controller 
@@ -18,10 +22,22 @@ class jobseekersmanageController extends Controller
     public function __construct()
 		{
 			$this->middleware('check');
-
 		}
-   public function index()
+   public function index(Request $request)
    {
+    ini_set('memory_limit', '-1');
+
+    // if ($request->ajax()) {
+    //     $data = Tbl_job_seekers::select('first_name','email')->get();
+    //     return Datatables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function($row){
+    //                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+    //                     return $btn;
+    //             })
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    // }
    	$job_seekers_list=Tbl_job_seekers::all();
 
       // $data = Tbl_job_seekers::leftjoin('tbl_seeker_applied_for_job','tbl_seeker_applied_for_job.seeker_ID','=','tbl_job_seekers.ID')
@@ -33,9 +49,50 @@ class jobseekersmanageController extends Controller
       //                         ->get()
       //                         ->toArray();        
       //                         return  $data;
-   	return view('job_seekers')->with('job_seekers_list',$job_seekers_list);
+   	return view('job_seekers');
    } 
 
+    public function fetch_seeker_details()
+    {
+        
+        $job_seekers_list=Tbl_job_seekers::select('sts','ID','first_name','email',DB::raw("DATE_FORMAT(dated, '%M %d %Y') as dated" ),'last_name',DB::raw("CONCAT(country,', ',state,', ',city) AS Location"))->orderBy('id','DESC')->get()->toArray();
+        // $status=array();
+        // $appliedjobs=array();
+        // $toReturn=array();
+        // // $job_seekers_list['appliedjobs']=array();
+        // // $job_seekers_list['status']=array();
+        // foreach($job_seekers_list as $key_seekers =>$value_seekers)
+        // {
+        //     // print_r($value_seekers);
+        //     $toReturn['appliedjobs'][]='<a onclick="opendata_model('.$value_seekers['ID'].')" type="button" class="btn btn-xs" style="background-color:#317eeb; color:#fff">View</a>';
+        //     $toReturn['status'] = '<button type="button" onclick="sts_change()" class="btn btn-xs" style="background-color:#04B431; color:#fff">'.$value_seekers['sts'].'</button>';
+        // }
+        // array_push($job_seekers_list,$toReturn['status']);
+        // return $job_seekers_list[0];
+        
+        return Datatables::of($job_seekers_list)
+        ->addColumn('AppliedJobs', function($row){
+            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+             return $btn;
+        })
+        ->rawColumns(['AppliedJobs'])
+        // ->addColumn('Status', function($row){
+        //     $btn = '<button type="button" onclick="sts_change()" class="btn btn-xs" style="background-color:#04B431; color:#fff">fff</button>';
+        //     return $btn;
+        // })
+//  ->rawColumns(['Status']) 
+//  ->addColumn('Action', function($row){
+//     $btn3 = ` <a href="{{url('admin/job_seekers/applied_jobs/edit/')}}" class="btn btn-xs mb-1" style="background-color:#FF9800; color:#fff">Edit
+//     candidate</a><br><a type="button" onclick="location.href = '{{url('admin/job_seekers/applied_jobs/auto_login_seeker')}}'" class="btn btn-xs mb-1" style="background-color:#606060; color:#fff">Login
+//     as candidate</a><br><button type="button" onclick="location.href = '{{url('admin/job_seekers/applied_jobs/de')}}';" class="btn btn-xs mb-1" style="background-color:#ff6347; color:#fff">Delete
+//     Candidate</button>`;
+//      return $btn3;
+// })
+// ->rawColumns(['Action'])
+     
+     ->make();
+       
+    }
    public function de($id=""){
       $d = Tbl_job_seekers::where('ID',$id)->delete();
       return redirect('admin/job_seekers_manage');
