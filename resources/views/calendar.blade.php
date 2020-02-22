@@ -232,6 +232,8 @@
                             
                         </li>
                     </ul>
+
+               
                     <div class="tab-pane" id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
                         <div class="row">
                             <div class="col-md-12">
@@ -331,6 +333,8 @@
                         </div> <!-- End Row -->
                     </div>
                     <!--end of tabpenel-->
+
+               
 
                     <div class="tab-pane" id="message-2" role="tabpanel" aria-labelledby="message-tab-2">
                         <div class="row">

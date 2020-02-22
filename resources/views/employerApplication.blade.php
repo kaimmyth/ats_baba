@@ -130,6 +130,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="myTable">
+                                        @if(count($toReturn['application'])!=0)
                                             @foreach($toReturn['application'] as $application)
                                             <tr>
                                                 <?php $id=$application['application_id'];
@@ -166,6 +167,7 @@
                                 </tbody>
                                 </table>
                                 {{$toReturn['application']->links()}}
+                                @endif
                             </div>
                         </div>
                     </div> <!-- end card-body -->

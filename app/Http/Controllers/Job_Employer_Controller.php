@@ -85,7 +85,7 @@ class Job_Employer_Controller extends Controller
             $toReturn['today_interview'] = count(tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get());
 
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
-            $toReturn['today_meeting'] = count(tbl_meeting::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['today_meeting'] = count(tbl_meeting::where('meeting_date', '=', date('Y-m-d'))->get());
             $toReturn['total_meeting'] = count(tbl_meeting::get());
             $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
             if ($one_group_teammember_employer_id) {
@@ -109,7 +109,7 @@ class Job_Employer_Controller extends Controller
             $toReturn['total_interview'] = count(tbl_schedule_interview::get());
             $toReturn['today_interview'] = count(tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get());
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
-            $toReturn['today_meeting'] = count(tbl_meeting::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['today_meeting'] = count(tbl_meeting::where('meeting_date', '=', date('Y-m-d'))->get());
             $toReturn['total_meeting'] = count(tbl_meeting::get());
             $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
             if ($one_group_teammember_employer_id) {
@@ -130,7 +130,7 @@ class Job_Employer_Controller extends Controller
             // $toReturn['total_resume']=count(Tbl_job_seekers::where('employer_id',$id)->get());  
             $toReturn['tota_interview'] = count(tbl_schedule_interview::get());
             $toReturn['today_interview'] = count(tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get());
-            $toReturn['today_meeting'] = count(tbl_meeting::where('dated', '=', date('Y-m-d'))->get());
+            $toReturn['today_meeting'] = count(tbl_meeting::where('meeting_date', '=', date('Y-m-d'))->get());
             $toReturn['total_meeting'] = count(tbl_meeting::get());
         }
         $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
@@ -538,6 +538,66 @@ class Job_Employer_Controller extends Controller
     }
 
 
+    public function view_jobs_open_today()
+
+    {
+        // $toReturn[] = array();
+        // $toReturn['user_type'] = Session::get('type');
+        // $post_job_show = tbl_job_seekers::get()->toArray();
+        //     $toReturn['post_job'] = tbl_post_jobs::orderBy('ID', 'DESC')->paginate(20);
+
+        // return view('my_posted_jobs')->with('toReturn', $toReturn)->with('post_job_show', $post_job_show);
+
+        ini_set('memory_limit', '-1');
+        $toReturn[] = array();
+        $current_module_id = 3;
+        $toReturn['user_type'] = Session::get('type');
+        if ($toReturn['user_type'] == "teammember") {
+            $user_permission_list = Session::get('user_permission');
+            if ($user_permission_list) {
+                foreach ($user_permission_list as $key => $value) {
+                    if ($user_permission_list[$key]['module_id'] == $current_module_id) {
+                        $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
+                    }
+                }
+            }
+            $toReturn['post_job'] = tbl_post_jobs::whereDate('dated', '=', date('Y-m-d'))->where('employer_ID', Session::get('user_id'))->get();
+
+
+        }
+
+        if ($toReturn['user_type'] == 'teamlead') {
+            $user_permission_list = Session::get('user_permission');
+            if ($user_permission_list) {
+                foreach ($user_permission_list as $key => $value) {
+                    if ($user_permission_list[$key]['module_id'] == $current_module_id) {
+                        $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
+                    }
+                }
+            }
+            $group_teammember_user_id = Session::get('one_group_teammember_id');
+
+            foreach (@$group_teammember_user_id as $key => $value) {
+                $teammember_record = user::where('ID', $group_teammember_user_id[$key])->where('user_type', "teammember")->first();
+                $one_group_teammember_employer_id[$key] = @$teammember_record->ID;
+            }
+            // $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->orderBy('ID', 'DESC')->paginate(20);
+
+            $array_val = Session::get('one_group_teammember_id');
+
+            $toReturn['post_job']  = tbl_post_jobs::whereDate('dated', '=', date('Y-m-d'))->where('employer_ID', Session::get('user_id'))->get();
+        }
+
+        if ($toReturn['user_type'] == "employer") {
+            $toReturn['post_job'] = tbl_post_jobs::whereDate('dated', '=', date('Y-m-d'))->where('employer_ID', Session::get('user_id'))->get();
+        }
+        $post_job_show = tbl_job_seekers::get()->toArray();
+
+        return view('my_posted_jobs')->with('toReturn', $toReturn)->with('post_job_show', $post_job_show);
+    }
+
+
+
     public function PostjobsAssignToJobSeeker(Request $request)
     {
         ini_set('memory_limit', '-1');
@@ -651,6 +711,39 @@ class Job_Employer_Controller extends Controller
         return view('employerApplication')->with('toReturn', $toReturn);
     }
 
+    public function application_received_today()
+    {
+        ini_set('memory_limit', '-1');
+        $user_type = Session::get('type');
+        if ($user_type == "employer") {
+            $user_id = Session::get('org_ID');
+        } else {
+            $user_id = Session::get('user_id');
+        }
+        $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
+        // return $one_group_teammember_employer_id;
+        if ($one_group_teammember_employer_id) {
+            $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
+                ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
+                // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ' )
+                ->whereIn('submitted_by', $one_group_teammember_employer_id)
+                ->where('dated', '=', date('Y-m-d'))
+                ->select('seeker.ID as seeker_id', 'tbl_seeker_applied_for_job.ID as application_id', 'tbl_seeker_applied_for_job.current_location as current_location', 'post_jobs.city as job_city', 'post_jobs.state as job_state', 'post_jobs.ID as ID', 'post_jobs.job_code as job_code', 'post_jobs.job_title as job_title', 'post_jobs.client_name as job_client_name', 'post_jobs.country as location', 'post_jobs.job_visa_status as  job_visa', 'post_jobs.pay_min as pay_min', 'seeker.city as seeker_city', 'seeker.state as seeker_state', 'post_jobs.pay_max as pay_max', 'seeker.first_name as can_first_name', 'seeker.last_name as can_last_name', 'seeker.country as can_location', 'seeker.visa_status as can_visa', 'tbl_seeker_applied_for_job.dated as applied_date')
+                ->get();
+            // return $toReturn['application'][1]['job_state']; 
+        } else {
+            $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
+                ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
+                // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ')
+                ->whereIn('submitted_by', $one_group_teammember_employer_id)
+                ->where('dated', '=', date('Y-m-d'))
+                ->select('seeker.ID as seeker_id', 'tbl_seeker_applied_for_job.ID as application_id', 'tbl_seeker_applied_for_job.current_location as current_location', 'post_jobs.city as job_city', 'post_jobs.state as job_state', 'post_jobs.ID as ID', 'post_jobs.job_code as job_code', 'post_jobs.job_title as job_title', 'post_jobs.client_name as job_client_name', 'post_jobs.country as location', 'post_jobs.job_visa_status as  job_visa', 'post_jobs.pay_min as pay_min', 'seeker.city as seeker_city', 'seeker.state as seeker_state', 'post_jobs.pay_max as pay_max', 'seeker.first_name as can_first_name', 'seeker.last_name as can_last_name', 'seeker.country as can_location', 'seeker.visa_status as can_visa', 'tbl_seeker_applied_for_job.dated as applied_date')
+                ->where('tbl_seeker_applied_for_job.employer_ID', $user_id)
+                ->get();
+        }
+        return view('employerApplication')->with('toReturn', $toReturn);
+    }
+
     public function application_delete($id = '')
     {
 
@@ -705,6 +798,68 @@ class Job_Employer_Controller extends Controller
             $all_user_id = user::where('org_ID', Session::get('org_ID'))->get('ID')->toArray();
             $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->paginate(10);
             $personal = tbl_job_seekers::whereIn('created_by', $one_group_teammember_employer_id)->where('org_id', Session::get('org_ID'))->orderBy('ID', 'DESC')
+                ->distinct()
+                ->paginate(20);
+            foreach ($personal as $key => $value) {
+                $eduArrya = array();
+                $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
+                foreach ($education as $key_seeker => $value) {
+                    $eduArrya[$key_seeker] = $education[$key_seeker]['degree_title'];
+                }
+                $personal[$key]->degree = implode(',', $eduArrya);
+            }
+        }
+        $job_list = Tbl_post_jobs::select('job_code', 'job_title', 'ID')->get()->toArray();
+        return view('search_resume')->with('personal', $personal)->with('source', $source)->with('toReturn', $toReturn)->with('job_list', $job_list);
+    }
+
+
+    public function list_todays_resume()
+    {
+        ini_set('memory_limit', '-1');
+        $toReturn = array();
+        $source = "Internal";
+        $one_group_teammember_employer_id = Session::get('one_group_teammember_id');
+        if ($one_group_teammember_employer_id) {
+            $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->paginate(10);
+            $personal = tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->where('dated', '=', date('Y-m-d'))->get();
+               
+             
+            foreach ($personal as $key => $value) {
+                $eduArrya = array();
+                $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
+                foreach ($education as $key_seeker => $value) {
+                    $eduArrya[$key_seeker] = $education[$key_seeker]['degree_title'];
+                }
+                $personal[$key]->degree = implode(',', $eduArrya);
+            }
+        } else {
+            $toReturn['post_job'] = tbl_post_jobs::where('employer_ID', Session::get('id'))->paginate(10);
+            $personal = tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->where('dated', '=', date('Y-m-d'))->get();
+            foreach ($personal as $key => $value) {
+                $education = tbl_seeker_academic::where('seeker_ID', $personal[$key]->ID)->get('degree_title')->toArray();
+                foreach ($education as $key_seeker => $value) {
+                    $eduArrya[$key_seeker] = $education[$key_seeker]['degree_title'];
+                }
+                $personal[$key]->degree = implode(',', $eduArrya);
+            }
+        }
+        $current_module_id = 2;
+        $toReturn['user_type'] = Session::get('type');
+        if ($toReturn['user_type'] == "teammember") {
+            $user_permission_list = Session::get('user_permission');
+            if ($user_permission_list) {
+                foreach ($user_permission_list as $key => $value) {
+                    if ($user_permission_list[$key]['module_id'] == $current_module_id) {
+                        $toReturn['current_module_permission'] = Tbl_team_member_permission::where('permission_value', $current_module_id)->where('team_member_id', Session::get('user_id'))->first()->toArray();
+                    }
+                }
+            }
+        }
+        if ($toReturn['user_type'] == "employer") {
+            $all_user_id = user::where('org_ID', Session::get('org_ID'))->get('ID')->toArray();
+            $toReturn['post_job'] = tbl_post_jobs::whereIn('created_by', $one_group_teammember_employer_id)->paginate(10);
+            $personal = tbl_job_seekers::whereIn('tbl_job_seekers.created_by', $one_group_teammember_employer_id)->where('dated', '=', date('Y-m-d'))->get()
                 ->distinct()
                 ->paginate(20);
             foreach ($personal as $key => $value) {
@@ -1655,6 +1810,35 @@ class Job_Employer_Controller extends Controller
         ini_set('memory_limit', '-1');
         $toReturn['meetingall'] = tbl_meeting::all();
         $toReturn['interviewall'] = tbl_schedule_interview::all();
+
+        $toReturn['today_interview'] = tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get();
+        $toReturn['today_meeting'] = tbl_meeting::where('dated', '=', date('Y-m-d'))->get();
+
+        $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->orderBy('id', 'DESC')->paginate(15);
+        return view('calendar', compact('toReturn'));
+    }
+    public function todaysinterviewshow()
+    {
+
+        ini_set('memory_limit', '-1');
+        $toReturn['meetingall'] = tbl_meeting::where('meeting_date', '=', date('Y-m-d'))->get();
+        $toReturn['interviewall'] = tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get();
+      
+
+        $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->orderBy('id', 'DESC')->paginate(15);
+        return view('calendar', compact('toReturn'));
+    }
+    public function todays_meetings_show()
+    {
+        ini_set('memory_limit', '-1');
+        $toReturn['meetingall'] = tbl_meeting::where('meeting_date', '=', date('Y-m-d'))->get();
+        $toReturn['interviewall'] = tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get();
+      
+
         $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->orderBy('id', 'DESC')->paginate(15);
         $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->orderBy('id', 'DESC')->paginate(15);
         $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->orderBy('id', 'DESC')->paginate(15);

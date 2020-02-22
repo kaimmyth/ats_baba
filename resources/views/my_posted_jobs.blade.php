@@ -150,6 +150,7 @@ width:60%;
                                             </tr>
                                         </thead>
                                         <tbody id="myTable">
+                                           @if(count($toReturn['post_job'])!=0)
                                             @foreach($toReturn['post_job'] as $posted_job)
                                             <tr>
                                                 <?php
@@ -217,9 +218,11 @@ width:60%;
 
                                             
                                             @endforeach
+                                            {{$toReturn['post_job']->links()}}
+                                    @endif
                                         </tbody>
                                     </table>
-                                    {{$toReturn['post_job']->links()}}
+                                  
                                 </div>
                             </div>
                         </div>

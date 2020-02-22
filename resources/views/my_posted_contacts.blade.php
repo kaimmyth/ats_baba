@@ -246,10 +246,10 @@ table.dataTable thead > tr > th {
                                                         <h3 class="card-title" style="color:#000;text-transform: none; font-size:large">Email List Detail:
                                                         @if(!empty($toReturn['user_type']=="teammember")) 
 															@if($toReturn['current_module_permission']['is_add']=="yes")
-												 <a href=""><button type="button" class="btn btn-success" style="float: right;">Add an Email List</button></a>
+												 <!-- <a href=""><button type="button" class="btn btn-success" style="float: right;">Add an Email List</button></a> -->
 															@endif
 															@else
-												 <a href=""><button type="button" class="btn btn-success" style="float: right;">Add an Email List</button></a>
+												 <!-- <a href=""><button type="button" class="btn btn-success" style="float: right;">Add an Email List</button></a> -->
 															@endif
                                                     </div>
                                                     		<div class="card-body">

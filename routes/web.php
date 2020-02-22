@@ -211,7 +211,10 @@ Route::get('employer/post_new_email_contact/show', 'ContactController@show_email
 Route::get('employer/my_posted_contacts/delete_email/{id}', 'ContactController@delete_email');
 Route::get('employer/my_posted_contacts/delete_email_list/{id}', 'ContactController@delete_email_list');
 Route::post('employer/importContact', 'Import_Controller@import');
+
 Route::get('employer/search_resume', 'Job_Employer_Controller@list');
+Route::get('employer/search_resume_published_today', 'Job_Employer_Controller@list_todays_resume');
+
 Route::get('employer/search_resume/delete/{id}', 'Job_Employer_Controller@list_delete');
 Route::get('employer/post_new_candidate', 'Job_Employer_Controller@show_form');
 Route::post('employer/post_new_candidate/insert', 'Job_Employer_Controller@post_new_candidate');
@@ -274,9 +277,15 @@ Route::get('jobseeker/dashboard', 'Job_Seeker_Controller@dashboard');
 
 
 Route::get('employer/Application', 'Job_Employer_Controller@application');
+Route::get('employer/application-received-today', 'Job_Employer_Controller@application_received_today');
+
+
 Route::get('employer/appli_del/{id}', 'Job_Employer_Controller@application_delete');
 
 Route::get('employer/posted_jobs', 'Job_Employer_Controller@view_my_posted_job');
+Route::get('employer/jobs-open-today','Job_Employer_Controller@view_jobs_open_today');//Jobs published today
+
+
 Route::get('employer/show_candiate_details/{id}','Job_Employer_Controller@get_candiate_deatils');
 Route::get('employer/post_new_job', 'Job_Employer_Controller@view_post_form');
 Route::post('employer/post_new_job/post_job', 'Job_Employer_Controller@Add_to_post_job');
@@ -398,6 +407,9 @@ Route::get('employer/dashboard/interview-meeting-tab/add', 'Job_Employer_Control
 Route::post('employer/dashboard/interview_meeting/add', 'Job_Employer_Controller@addinterview');
 Route::post('employer/dashboard/interview_meeting_interview/add1', 'Job_Employer_Controller@addmeeting');
 Route::get('employer/dashboard/interview-meeting', 'Job_Employer_Controller@meetingshow');
+
+Route::get('employer/dashboard/interview-today', 'Job_Employer_Controller@todaysinterviewshow');//For todays interview
+Route::get('employer/dashboard/meeting-today', 'Job_Employer_Controller@todays_meetings_show');//For todays meetings
 Route::get('employer/dashboard/interview-meeting-del{id}', 'Job_Employer_Controller@del');
 Route::get('employer/dashboard/interview-meeting-intdel{ida}', 'Job_Employer_Controller@delint');
 

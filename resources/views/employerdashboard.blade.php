@@ -8,7 +8,7 @@
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-comments-o icon-rounded"></i>
                         <div class="stats">
-                            <a href="{{url('employer/posted_jobs')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Jobs Detail" style="float: right;"></i></a>
+                            <a href="{{url('employer/jobs-open-today')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Jobs Detail" style="float: right;"></i></a>
                             <h5><strong>{{$toReturn['one_day_job']}}Jobs</strong></h5>
                             <span>Open Today</span>
                         </div>
@@ -18,7 +18,7 @@
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-tasks user1 icon-rounded"></i>
                         <div class="stats">
-                            <a href="{{url('employer/Application')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Application Details" style="float: right;"></i></a>
+                            <a href="{{url('employer/application-received-today')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Application Details" style="float: right;"></i></a>
                             <h5><strong>{{$toReturn['today_application']}} Apps</strong></h5>
                             <span>Received Today !</span>
                         </div>
@@ -28,9 +28,9 @@
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-support user2 icon-rounded"></i>
                         <div class="stats">
-                            <a href="{{url('employer/search_resume')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Resume Detail" style="float: right;"></i></a>
+                            <a href="{{url('employer/search_resume_published_today')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Resume Detail" style="float: right;"></i></a>
                             <h5><strong>{{$toReturn['today_resume']}} Resume</strong></h5>
-                            <span>Work In Progress !</span>
+                            <span>Published Today !</span>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-share-alt dollar1 icon-rounded"></i>
                         <div class="stats">
-                            <a href="{{url('employer/dashboard/interview-meeting')}}"><i class="fa fa-eye" id="interview" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Interview Details" style="float: right;"></i></a>
+                            <a href="{{url('employer/dashboard/interview-today')}}"><i class="fa fa-eye" id="interview" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Interview Details" style="float: right;"></i></a>
                             <h5><strong>{{$toReturn['today_interview']}} Interview</strong></h5>
                             <span>Happening Today !</span>
                         </div>
@@ -49,7 +49,7 @@
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-calendar dollar2 icon-rounded"></i>
                         <div class="stats">
-                            <a href="{{url('employer/dashboard/interview-meeting')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Meeting Details" style="float: right;"></i></a>
+                            <a href="{{url('employer/dashboard/meeting-today')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Meeting Details" style="float: right;"></i></a>
                             <h5><strong>{{$toReturn['today_meeting']}} Meeting</strong></h5>
                             <span>Happening Today !</span>
                         </div>

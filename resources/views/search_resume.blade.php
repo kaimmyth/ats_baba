@@ -129,6 +129,7 @@
                                         </div>
                                     </div>
                                 </form>
+
                                 @if(!empty($toReturn['user_type']=="teammember"))
                                 @if($toReturn['current_module_permission']['is_add']=="yes")
                                 <a href="{{url('employer/post_new_candidate')}}"><button type="button" class="btn btn-info" style="float:left;">Add a Candidate</button></a>
@@ -158,6 +159,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="myTable">
+                                            @if(count($personal) !=0))
                                                 @foreach($personal as $key => $value)
                                                 <?php $id=$personal[$key]->ID;
 														$dob=$personal[$key]->dob;
@@ -244,6 +246,7 @@
                                             </tbody>
                                         </table>
                                         {{$personal->links()}}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
