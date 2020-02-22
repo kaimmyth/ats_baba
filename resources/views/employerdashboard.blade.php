@@ -69,16 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 widget widget1">
-                    <div class="r3_counter_box">
-                        <i class="pull-left fa fa-file-word-o dollar1 icon-rounded" style="background: #8BC34A;"></i>
-                        <div class="stats">
-                            <a href="{{url('employer/search_resume')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Resume Details" style="float: right;"></i></a>
-                            <h5><strong>{{$toReturn['total_resume']}} Resume</strong></h5>
-                            <span>Total Submitted !</span>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="col-md-2 widget widget1">
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-check-circle dollar1 icon-rounded" style="background: #09c1b0;"></i>
@@ -86,6 +77,16 @@
                             <a href="{{url('employer/Application')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Application Details" style="float: right;"></i></a>
                             <h5><strong>{{$toReturn['total_application']}} Application</strong></h5>
                             <span> Total Applications !</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 widget widget1">
+                    <div class="r3_counter_box">
+                        <i class="pull-left fa fa-file-word-o dollar1 icon-rounded" style="background: #8BC34A;"></i>
+                        <div class="stats">
+                            <a href="{{url('employer/search_resume')}}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Resume Details" style="float: right;"></i></a>
+                            <h5><strong>{{$toReturn['total_resume']}} Resume</strong></h5>
+                            <span>Total Submitted !</span>
                         </div>
                     </div>
                 </div>

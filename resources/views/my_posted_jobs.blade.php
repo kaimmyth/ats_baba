@@ -218,11 +218,11 @@ width:60%;
 
                                             
                                             @endforeach
-                                            {{$toReturn['post_job']->links()}}
-                                    @endif
+                                            
                                         </tbody>
                                     </table>
-                                  
+                                    {{$toReturn['post_job']->links()}}
+                                    @endif
                                 </div>
                             </div>
                         </div>

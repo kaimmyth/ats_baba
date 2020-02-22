@@ -726,8 +726,8 @@ class Job_Employer_Controller extends Controller
             $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
                 ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
                 // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ' )
-                ->whereIn('submitted_by', $one_group_teammember_employer_id)
-                ->where('dated', '=', date('Y-m-d'))
+                ->whereIn('tbl_seeker_applied_for_job.submitted_by', $one_group_teammember_employer_id)
+                ->where('tbl_seeker_applied_for_job.dated', '=', date('Y-m-d'))
                 ->select('seeker.ID as seeker_id', 'tbl_seeker_applied_for_job.ID as application_id', 'tbl_seeker_applied_for_job.current_location as current_location', 'post_jobs.city as job_city', 'post_jobs.state as job_state', 'post_jobs.ID as ID', 'post_jobs.job_code as job_code', 'post_jobs.job_title as job_title', 'post_jobs.client_name as job_client_name', 'post_jobs.country as location', 'post_jobs.job_visa_status as  job_visa', 'post_jobs.pay_min as pay_min', 'seeker.city as seeker_city', 'seeker.state as seeker_state', 'post_jobs.pay_max as pay_max', 'seeker.first_name as can_first_name', 'seeker.last_name as can_last_name', 'seeker.country as can_location', 'seeker.visa_status as can_visa', 'tbl_seeker_applied_for_job.dated as applied_date')
                 ->get();
             // return $toReturn['application'][1]['job_state']; 
@@ -735,8 +735,8 @@ class Job_Employer_Controller extends Controller
             $toReturn['application'] = Tbl_seeker_applied_for_job::leftjoin('tbl_post_jobs as post_jobs', 'tbl_seeker_applied_for_job.job_ID', '=', 'post_jobs.ID')
                 ->leftjoin('tbl_job_seekers as seeker', 'tbl_seeker_applied_for_job.seeker_ID', '=', 'seeker.ID')
                 // ->leftjoin('tbl_seeker_applied_for_job as applied_jobs','applied_jobs.job_ID','=','post_jobs.ID ')
-                ->whereIn('submitted_by', $one_group_teammember_employer_id)
-                ->where('dated', '=', date('Y-m-d'))
+                ->whereIn('tbl_seeker_applied_for_job.submitted_by', $one_group_teammember_employer_id)
+                ->where('tbl_seeker_applied_for_job.dated', '=', date('Y-m-d'))
                 ->select('seeker.ID as seeker_id', 'tbl_seeker_applied_for_job.ID as application_id', 'tbl_seeker_applied_for_job.current_location as current_location', 'post_jobs.city as job_city', 'post_jobs.state as job_state', 'post_jobs.ID as ID', 'post_jobs.job_code as job_code', 'post_jobs.job_title as job_title', 'post_jobs.client_name as job_client_name', 'post_jobs.country as location', 'post_jobs.job_visa_status as  job_visa', 'post_jobs.pay_min as pay_min', 'seeker.city as seeker_city', 'seeker.state as seeker_state', 'post_jobs.pay_max as pay_max', 'seeker.first_name as can_first_name', 'seeker.last_name as can_last_name', 'seeker.country as can_location', 'seeker.visa_status as can_visa', 'tbl_seeker_applied_for_job.dated as applied_date')
                 ->where('tbl_seeker_applied_for_job.employer_ID', $user_id)
                 ->get();

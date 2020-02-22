@@ -158,9 +158,7 @@
                                                     <a href="{{url('employer/appli_del/'.$id)}}" class="hidden on-editing login-row" title="Delete" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-trash-o"></i></a>
                                                     <a href="{{url('employer/appli_forward/'.$id)}}"><i class="fa fa-arrow-right" title="Candidate Forward "></i></a>
                                                     <a href="{{url('employer/application_view/'.$id)}}"> <i class="fa fa-eye" aria-hidden="true" title="View  Application"></i></a>
-
                                                 </td>
-                                                
                                 </div>
                                 </tr>
                                 @endforeach

@@ -8,7 +8,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-   
+
 
     <link href="{{url('plugins/sweetalert2/sweetalert2.css')}}" rel="stylesheet" type="text/css">
 
@@ -16,7 +16,7 @@
     <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
-    <link  href="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{url('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css')}}" rel="stylesheet" type="text/css">
     <!-- <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" /> -->
     <link href="{{url('plugins/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
@@ -90,7 +90,7 @@
 
     table.dataTable thead>tr>th {
         /* padding-left: 8px; */
-         padding-right: 30px;
+        padding-right: 30px;
     }
 
     .table-bordered th {
@@ -277,246 +277,327 @@
             box-shadow: 1px 1px 1px #bfbfbf;
         }
     }
-    #wrapper.enlarged .left.side-menu {
-    padding-top: 0px;
-    width: 50px;
-    z-index: 5;
-}
-#sidebar-menu > ul > li > a {
-    color: #004cb7;
-    display: block;
-    padding: 15px 25px;
-}
-.side-menu.left {
-    background: #c7deff;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    position: absolute;
-    top: 70px;
-}
-.subdrop {
-    background: #c7deff;
-}
-#sidebar-menu {
-    background-color: #c7deff;
-    padding-bottom: 50px;
-    width: 100%;
-}
-.footer {
-    background-color: #c7deff;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    bottom: 0px;
-    color: #000000;
-    text-align: left;
-    padding: 7px 30px;
-    position: absolute;
-    right: 0;
-    left: 0px;
-    font-weight: 600;
-}
 
-/*
+    #wrapper.enlarged .left.side-menu {
+        padding-top: 0px;
+        width: 50px;
+        z-index: 5;
+    }
+
+    #sidebar-menu>ul>li>a {
+        color: #004cb7;
+        display: block;
+        padding: 15px 25px;
+    }
+
+    .side-menu.left {
+        background: #c7deff;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        position: absolute;
+        top: 70px;
+    }
+
+    .subdrop {
+        background: #c7deff;
+    }
+
+    #sidebar-menu {
+        background-color: #c7deff;
+        padding-bottom: 50px;
+        width: 100%;
+    }
+
+    .footer {
+        background-color: #c7deff;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        bottom: 0px;
+        color: #000000;
+        text-align: left;
+        padding: 7px 30px;
+        position: absolute;
+        right: 0;
+        left: 0px;
+        font-weight: 600;
+    }
+
+    /*
 Just a preloading animation, didn't saw many of them here on Codepen, so I said why not create one ?
 
 Used jQuery's window.load() function, in this demo there is also setTimeot(), cause there is no content to load, so we are simulating it.
 */
-@import url(https://fonts.googleapis.com/css?family=Oswald|Josefin+Sans:300);
+    @import url(https://fonts.googleapis.com/css?family=Oswald|Josefin+Sans:300);
 
-html {
-  box-sizing: border-box;
-  font-size: 100%;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+    html {
+        box-sizing: border-box;
+        font-size: 100%;
+    }
 
-/* ====  Preloader styles ==== */
-#hola{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.6);
-    position: fixed;
-    z-index: 999;
-}
-#preloader {
-	position:relative;
-    width: 80px;
-    height: 80px;
-    top: 45%;
-    margin: 0 auto;
-}
-#preloader span {
-	position:absolute;
-	border: 8px solid hsl(215, 100%, 51%);
-	border-top: 8px solid transparent;
-	border-radius:999px;
-    animation: myanimation 10s infinite;
-}
-@keyframes myanimation {
-  0% {border-color: red;}
-  25%{border-color:yellow;}
-  50%{border-color:green;}
-  75%{border-color:brown;}
-  100% {border-color: red;}
-}
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
 
-#preloader span:nth-child(1){
-	width:80px;
-	height:80px;
-	animation: spin-1 2s infinite linear;
-}
-#preloader span:nth-child(2){
-	top: 20px;
-	left: 20px;
-	width:40px;
-	height:40px;
-	animation: spin-2 1s infinite linear;
-}
-@keyframes spin-1 {
-	0% {transform: rotate(360deg); opacity: 1;}
-	50% {transform: rotate(180deg); opacity: 0.5;}
-	100% {transform: rotate(0deg); opacity: 1;}
-}
-@keyframes spin-2 {
-	0% {transform: rotate(0deg); opacity: 0.5;}
-	50% {transform: rotate(180deg); opacity: 1;}
-	100% {transform: rotate(360deg); opacity: 0.5;}
-}
+    /* ====  Preloader styles ==== */
+    #hola {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.6);
+        position: fixed;
+        z-index: 999;
+    }
 
-/* ====  Page layout ==== */
-.page-wrap{
-    overflow-x: hidden;
-    height: 100vh;
-}
+    #preloader {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        top: 45%;
+        margin: 0 auto;
+    }
 
-.home{
-  height: 100vh;
-  position: relative;
-  background-color: #F2F6F2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.home:before{
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  content: '';
-  background-color: #F2F6F2;
-}
-.home:after{
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  z-index: 10;
-  top: 0;
-  right: 0;
-  content: '';
-  background-color: #F2F6F2;
-}
-.animate-border{
-  border: 40px solid #EDEBE6;
-  transition: border .5s .2s ease;
-}
-.home.divide:before{
-  transition: all .6s 1.2s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-  width: 0;
-}
-.home.divide:after{
-  transition: all .6s 1.2s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-  width: 0;
-}
-.text-wrap{
-    width: 100%;
-    max-width: 44rem;
-    text-align: center;
-}
-h1{
-    font-size: 4rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-    font-family: 'Oswald';
-    color: #5F5264;
-    margin-bottom: 3rem;
-}
-p{
-    font-size: 1rem;
-    color: #b6ccb6;
-    line-height: 1.4;
-    font-family: 'Josefin Sans';
-}
+    #preloader span {
+        position: absolute;
+        border: 8px solid hsl(215, 100%, 51%);
+        border-top: 8px solid transparent;
+        border-radius: 999px;
+        animation: myanimation 10s infinite;
+    }
 
-@media screen and (max-width:1024px){
-  html{
-    font-size: 92.5%;
-  }
-}
-@media screen and (max-width:640px){
-  html{
-    font-size: 86%;
-  }
-  p{
-    font-size: 1.1rem;
-  }
-}
+    @keyframes myanimation {
+        0% {
+            border-color: red;
+        }
 
-.pace-active{display: none!important;}
-  .popupbox {
-    background-color:rgba(248,248,248,.60);
-    position:fixed;
-    height:100%;
-    width:100%;
-    z-index:111;
-    top:0;
-  }
-  .loaderpopupbox {
-    background-color:rgba();
-    position:fixed;
-    height:100%;
-    width:100%;
-    z-index:100;
-    top:0;
-  }
-  .popup {
-    margin: 15% 30%;
-    padding: 8px;
-    position: relative;
-    width: 40%;
-    border-radius:5px;
-  }
-  @media(max-width:767px){
+        25% {
+            border-color: yellow;
+        }
+
+        50% {
+            border-color: green;
+        }
+
+        75% {
+            border-color: brown;
+        }
+
+        100% {
+            border-color: red;
+        }
+    }
+
+    #preloader span:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        animation: spin-1 2s infinite linear;
+    }
+
+    #preloader span:nth-child(2) {
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        animation: spin-2 1s infinite linear;
+    }
+
+    @keyframes spin-1 {
+        0% {
+            transform: rotate(360deg);
+            opacity: 1;
+        }
+
+        50% {
+            transform: rotate(180deg);
+            opacity: 0.5;
+        }
+
+        100% {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+    }
+
+    @keyframes spin-2 {
+        0% {
+            transform: rotate(0deg);
+            opacity: 0.5;
+        }
+
+        50% {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+
+        100% {
+            transform: rotate(360deg);
+            opacity: 0.5;
+        }
+    }
+
+    /* ====  Page layout ==== */
+    .page-wrap {
+        overflow-x: hidden;
+        height: 100vh;
+    }
+
+    .home {
+        height: 100vh;
+        position: relative;
+        background-color: #F2F6F2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .home:before {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        content: '';
+        background-color: #F2F6F2;
+    }
+
+    .home:after {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        content: '';
+        background-color: #F2F6F2;
+    }
+
+    .animate-border {
+        border: 40px solid #EDEBE6;
+        transition: border .5s .2s ease;
+    }
+
+    .home.divide:before {
+        transition: all .6s 1.2s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        width: 0;
+    }
+
+    .home.divide:after {
+        transition: all .6s 1.2s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        width: 0;
+    }
+
+    .text-wrap {
+        width: 100%;
+        max-width: 44rem;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 4rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        font-family: 'Oswald';
+        color: #5F5264;
+        margin-bottom: 3rem;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #b6ccb6;
+        line-height: 1.4;
+        font-family: 'Josefin Sans';
+    }
+
+    @media screen and (max-width:1024px) {
+        html {
+            font-size: 92.5%;
+        }
+    }
+
+    @media screen and (max-width:640px) {
+        html {
+            font-size: 86%;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+    }
+
+    .pace-active {
+        display: none !important;
+    }
+
+    .popupbox {
+        background-color: rgba(248, 248, 248, .60);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 111;
+        top: 0;
+    }
+
+    .loaderpopupbox {
+        background-color: rgba();
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 100;
+        top: 0;
+    }
+
     .popup {
-      margin: 40% 30%;
-      width: 40%;
-      border-radius:5px;
+        margin: 15% 30%;
+        padding: 8px;
+        position: relative;
+        width: 40%;
+        border-radius: 5px;
     }
-    .popupbox .popup .loader12 img{width:100px; height:100px;}
-    .ml-bg{ background-position: bottom left;
-      background-color: #4cc0bf;;
-    }
-    .loaderpopupbox .popup .loader10 img{width:50px; height:50px;}
-    .ml-bg{ background-position: bottom left;
-      background-color: #4cc0bf;;
-    }
-    .blank-loader .content-wrapper .flexbox-container {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: block;
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      -moz-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      height: fit-content;
-    }
-  }
 
+    @media(max-width:767px) {
+        .popup {
+            margin: 40% 30%;
+            width: 40%;
+            border-radius: 5px;
+        }
+
+        .popupbox .popup .loader12 img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .ml-bg {
+            background-position: bottom left;
+            background-color: #4cc0bf;
+            ;
+        }
+
+        .loaderpopupbox .popup .loader10 img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .ml-bg {
+            background-position: bottom left;
+            background-color: #4cc0bf;
+            ;
+        }
+
+        .blank-loader .content-wrapper .flexbox-container {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: block;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: fit-content;
+        }
+    }
 </style>
 
 <body>
@@ -528,11 +609,9 @@ p{
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        {{-- <a href="{{url('employer/dashboard')}}" class="logo"><img
-                                src="{{url('public/companylogo/baba_logo.png')}}" style="width:40%" alt="" id="img1"><img
-                                src="{{url('public/companylogo/baba_logo.png')}}" style="width:40%" alt="" id="img2"> <span>HRMS </span></a> --}}
+                        {{-- <a href="{{url('employer/dashboard')}}" class="logo"><img src="{{url('public/companylogo/baba_logo.png')}}" style="width:40%" alt="" id="img1"><img src="{{url('public/companylogo/baba_logo.png')}}" style="width:40%" alt="" id="img2"> <span>HRMS </span></a> --}}
                         <a href="{{url('employer/dashboard')}}" class="logo"><i class="md md-terrain"></i>
-                        <span>HRMS </span></a>
+                            <span>HRMS </span></a>
                     </div>
                 </div>
                 <!-- Button mobile view to collapse sidebar menu -->
@@ -547,8 +626,8 @@ p{
                                         aria-hidden="true"></i>
                                     <i class="fa fa-arrow-left button-menu-mobile open-left" style="display:none"
                                         id="left" aria-hidden="true"></i> --}}
-                                        <i class="ion-arrow-swap button-menu-mobile open-left" id="click_me"></i>
-                                        <input type="hidden" value="1" id="change_val">
+                                    <i class="ion-arrow-swap button-menu-mobile open-left" id="click_me"></i>
+                                    <input type="hidden" value="1" id="change_val">
                                 </a>
                             </li>
                             {{-- <li class="hide-phone float-left">
@@ -561,11 +640,8 @@ p{
 
                         <ul class="nav navbar-right float-right list-inline">
                             <li class="dropdown d-none d-sm-block">
-                                <a href="javascript:void(0);" data-target="#Notification"
-                                    class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
-                                    aria-expanded="true">
-                                    <i class="md md-notifications"></i> <span
-                                        class="badge badge-pill badge-xs badge-danger" id="notification_no"></span>
+                                <a href="javascript:void(0);" data-target="#Notification" class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="md md-notifications"></i> <span class="badge badge-pill badge-xs badge-danger" id="notification_no"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-lg" id="Notification">
                                     <li class="text-center notifi-title">Notification</li>
@@ -585,38 +661,29 @@ p{
                             </li>
                             <li class="d-none d-sm-block">
                                 <div class="btn-group">
-                                    <a class="btn btn-link float-left" href="{{url('employer/my_posted_contacts')}}"
-                                        title="Contacts"><i class="fa fa-user" aria-hidden="true"
-                                            style="color: #fff;background: none;font-size: 17px;"></i></a>
+                                    <a class="btn btn-link float-left" href="{{url('employer/my_posted_contacts')}}" title="Contacts"><i class="fa fa-user" aria-hidden="true" style="color: #fff;background: none;font-size: 17px;"></i></a>
                                 </div>
                             </li>
                             <li class="d-none d-sm-block">
                                 <div class="btn-group">
-                                    <a class="btn btn-link float-left" href="{{url('employer/posted_companies')}}"
-                                        title="Organizations"><i class="fa fa-building" aria-hidden="true"
-                                            style="color: #fff;background: none;font-size: 17px;"></i></a>
+                                    <a class="btn btn-link float-left" href="{{url('employer/posted_companies')}}" title="Organizations"><i class="fa fa-building" aria-hidden="true" style="color: #fff;background: none;font-size: 17px;"></i></a>
                                 </div>
                             </li>
                             <li class="dropdown open">
-                                <a href="#" class="dropdown-toggle profile" data-toggle="dropdown"
-                                    aria-expanded="true"><i class="fa fa-th" aria-hidden="true"></i></a>
+                                <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-th" aria-hidden="true"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#" class="dropdown-item"><i
-                                                class="fa fa-get-pocket"></i>&nbsp;&nbsp;A/C Receivables</a></li>
-                                    <li><a href="#" class="dropdown-item"><i
-                                                class="fa fa-credit-card"></i>&nbsp;&nbsp;A/C Payables</a></li>
+                                    <li><a href="#" class="dropdown-item"><i class="fa fa-get-pocket"></i>&nbsp;&nbsp;A/C Receivables</a></li>
+                                    <li><a href="#" class="dropdown-item"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;A/C Payables</a></li>
                                     <li><a href="#" class="dropdown-item"><i class="fa fa-users"></i>&nbsp;&nbsp;Human
                                             Resources</a></li>
                                     <li><a href="#" class="dropdown-item"><i class="fa fa-users"></i>&nbsp;&nbsp;HR
                                             Recruitment</a></li>
-                                    <li><a href="{{url('employer/marketing')}}" class="dropdown-item"><i
-                                                class="fa fa-file-audio-o"></i>&nbsp;&nbsp;Marketing</a></li>
+                                    <li><a href="{{url('employer/marketing')}}" class="dropdown-item"><i class="fa fa-file-audio-o"></i>&nbsp;&nbsp;Marketing</a></li>
 
                                 </ul>
                             </li>
                             <li class="dropdown open">
-                                 <a href="#" class="dropdown-toggle profile" data-toggle="dropdown"
-                                    aria-expanded="true"><img id="profile_image" title="{{Session::get('full_name')}}" alt="user-img" class="rounded-circle" style="background-color:white;width:50px;height:50px;z-index:20px;">
+                                <a href="#" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img id="profile_image" title="{{Session::get('full_name')}}" alt="user-img" class="rounded-circle" style="background-color:white;width:50px;height:50px;z-index:20px;">
                                 </a>
                                 <!--<a href="#" class="dropdown-toggle profile" data-toggle="dropdown"-->
                                 <!--    aria-expanded="true"><img-->
@@ -625,32 +692,27 @@ p{
                                 <!--</a>-->
                                 <ul class="dropdown-menu">
 
-                                    <li id="hide_org" style="display:block;"><a
-                                            href="{{url('employer/companyprofile')}}" class="dropdown-item"><i
-                                                class="md md-face-unlock mr-2"></i>ORG.PROFILE</a></li>
+                                    <li id="hide_org" style="display:block;"><a href="{{url('employer/companyprofile')}}" class="dropdown-item"><i class="md md-face-unlock mr-2"></i>ORG.PROFILE</a></li>
 
-                                    <li><a href="{{url('employer/manageteammember')}}" class="dropdown-item"><i
-                                                class="md md-settings mr-2"></i>USER MANAGEMENT</a></li>
-                                    <li><a href="javascript:void(0)" class="dropdown-item"><i
-                                                class="md md-lock mr-2"></i>SETTING</a></li>
-                                    <li><a href="{{url('employer/logout')}}" class="dropdown-item"><i
-                                                class="md md-settings-power mr-2"></i> Logout</a></li>
+                                    <li><a href="{{url('employer/manageteammember')}}" class="dropdown-item"><i class="md md-settings mr-2"></i>USER MANAGEMENT</a></li>
+                                    <li><a href="javascript:void(0)" class="dropdown-item"><i class="md md-lock mr-2"></i>SETTING</a></li>
+                                    <li><a href="{{url('employer/logout')}}" class="dropdown-item"><i class="md md-settings-power mr-2"></i> Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </nav>
             </div>
-            
+
             <!-- Page preloader -->
-                <div id="hola">
+            <div id="hola">
                 <div id="preloader">
-                <span></span>
-                <span></span>
-                  </div>
-                    </div>
-                     <!--{{-- <div class="page-wrap">-->
-                            <!--<div class="home">  --}}-->
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <!--{{-- <div class="page-wrap">-->
+            <!--<div class="home">  --}}-->
             <!-- Top Bar End -->
 
             <!-- Top Bar End -->
