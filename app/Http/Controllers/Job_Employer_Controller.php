@@ -1359,25 +1359,22 @@ class Job_Employer_Controller extends Controller
 
     public function edit_teammember_add(Request $Request)
     {
+        // return $Request;
         ini_set('memory_limit', '-1');
         // return $Request->profile_image;
         $date = date('Y-m-d h:i:s', time());
         $con =  $Request->country;
         $sta =  $Request->state;
         $cit =  $Request->city;
-        $val_contries = countries::where('country_id', $con)->orWhere('country', $con)->first('country_name');
+        $val_contries = countries::where('country_id', $con)->orWhere('country_name', $con)->first('country_name');
         $val_state = states::where('state_id', $sta)->orWhere('state_name', $sta)->first('state_name');
         $val_city = cities::where('city_id', $cit)->orWhere('city_name', $cit)->first('city_name');
         if ($Request->has('profile_image')) {
             $cv = $Request->file('profile_image');
             $store_cv = $cv->getClientOriginalName();
             $cv->move(public_path('seekerresume'), $store_cv);
-            // echo $cv;
-            // echo"done";
-            // exit;
         } else {
             $store_cv = $Request->cv_file_before;
-            // echo"work";
         }
 
         // return $store_cv;

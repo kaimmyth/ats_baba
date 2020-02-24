@@ -337,11 +337,11 @@
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
                                                     <input class="form-check-input chkbx" type="checkbox" name="param[]" value="expectedrate" checked>
                                                     <label class="form-label">Expected Rate<span class="red">*</span></label>
-                                                    <input type="text" class="form-control" id="expectedrate" onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
+                                                    <input type="text" class="form-control" id="expectedrate"  onblur="rate()" placeholder="Expected Rate" name="expectedrate" required>
                                                     <span id="expectedrate_error">Please enter valid rate</span>
                                                 </div><!-- end of col -->
                                                 <div class="col-sm-12 col-md-6 col-lg-4" id="dels">
-                                                    <input class="form-check-input chkbx" type="checkbox" name="param[]" value="expectedrate" checked>
+                                                    <input class="form-check-input chkbx" type="checkbox" name="param[]" value="job_type" checked>
                                                     <label class="form-label">Job type<span class="red">*</span></label>
                                                     <select name="job_type" id="expectedrate1" name="job_type" onchange="jobtype()" required>
                                                         <option value="">Select job type</option>
@@ -364,16 +364,7 @@
                                                     <span id="expectedrate_error1">Please enter valid rate</span>
                                                 </div><!-- end of col -->
 
-                                                <!-- <div class="col-sm-12 col-md-6 col-lg-4" id="dels" >
-                                                <input class="form-check-input chkbx" type="checkbox"  name="param[]" value="expectedrate" checked> 
-                                                <label class="form-label">Job type<span class="red">*</span></label>
-                                                <select name="job_type" id="expectedrate1" required>
-                                                    <option value="">Select job type</option>
-                                                    <option value="fulltime">Fulltime</option>
-                                                    <option value="contact">Contract</option>
-                                                </select>
-                                                <span id="expectedrate_error1">Please enter valid rate</span> -->
-                                                <!-- </div>end of col -->
+                                           
 
                                                 <div class="col-sm-1" id="dels" style="background-color:;">
 
@@ -414,9 +405,9 @@
                                             </div>
                                         </div>
                                         <hr>
-                                        <div  style="padding-left:44%;">
-                                            <input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="exp_required" value="exp_required"> &nbsp;&nbsp;&nbsp; Experience Required ?
-
+                                        <div >
+                                            <center><input type="checkbox" required onclick="javascript:showTable('exp_required','exp_table');" id="exp_required" name="param[]" value="experience"> &nbsp;&nbsp;&nbsp; Experience Required ?
+                                            </center>
                                             <table class="table" style="display:none;" id="exp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead style="    background: #317eeb;">
                                                     <tr>
@@ -464,9 +455,10 @@
                                             </table>
                                         </div>
                                         <hr>
-                                        <div  style="padding-left:44%;"> 
-                                            <input type="checkbox" onclick="javascript:showTable('ref_required','ref_table');" id="ref_required" name="ref_required" value="ref_required"> &nbsp;&nbsp;&nbsp; Reference Required ?
-
+                                        <div > 
+                                        <center>
+                                            <input type="checkbox" onclick="javascript:showTable('ref_required','ref_table');" id="ref_required" name="param[]" value="reference"> &nbsp;&nbsp;&nbsp; Reference Required ?
+                                        </center>
                                             <table class="table" style="display:none;" id="ref_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
@@ -525,8 +517,10 @@
                                             </table>
                                         </div>
                                         <hr>
-                                        <div style="padding-left:44%;">
-                                            <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="Employer_required" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                        <div>
+                                        <center>
+                                            <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="param[]" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
+                                        </center>
                                             <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
@@ -542,19 +536,21 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input type="text" name="Companyemp_detail"  class="form-control" placeholder="Company name"  value="{{@$toReturn['application_emp_details']->company_name}}" id="company_name" /><span id="company_name_detail" style="display: none;">Please enter valid name</span></td>
-                                                        <td><input type="text" name="Emailemp_detail"  class="form-control" placeholder="Eamil ID"  value="{{@$toReturn['application_emp_details']->email_Id}}"  /></td>
-                                                        <td><input type="text" name="Employeremp_detail"  class="form-control" placeholder="Empolyer Name"  value="{{@$toReturn['application_emp_details']->employer_name}}"  /></td>
-                                                        <td><input type="text" name="Phoneemp_detail" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  value="{{@$toReturn['application_emp_details']->phone_number}}"  ></td>
-                                                        <td><input type="text" name="extenson" id="extenson" maxlength="12" class="form-control" placeholder="Extention"   value="{{@$toReturn['application_emp_details']->ext_no}}" ></td>
+                                                        <td><input type="text" name="Employer_required[]"  class="form-control" placeholder="Company name"  value="{{@$toReturn['application_emp_details']->company_name}}" id="company_name" /><span id="company_name_detail" style="display: none;">Please enter valid name</span></td>
+                                                        <td><input type="text" name="Employer_required[]"  class="form-control" placeholder="Eamil ID"  value="{{@$toReturn['application_emp_details']->email_Id}}"  /></td>
+                                                        <td><input type="text" name="Employer_required[]"  class="form-control" placeholder="Empolyer Name"  value="{{@$toReturn['application_emp_details']->employer_name}}"  /></td>
+                                                        <td><input type="text" name="Employer_required[]" id="Phoneemp_detail" onkeyup="chekphone_no();" maxlength="12" class="form-control" placeholder="Phone Number"  value="{{@$toReturn['application_emp_details']->phone_number}}"  ></td>
+                                                        <td><input type="text" name="Employer_required[]" id="extenson" maxlength="12" class="form-control" placeholder="Extention"   value="{{@$toReturn['application_emp_details']->ext_no}}" ></td>
                                                     </tr>
                                                     <!-- <p id="phone_mess" style="color:red;display:none;"> Please Enter Only Number</p> -->
                                                 </tbody>
                                             </table>
                                         </div>
                                         <hr>
-                                        <div  style="padding-left:44%;">
-                                            <input type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="attachment_required" id="attachment_required" value="attachment_required"> &nbsp;&nbsp;&nbsp; Attachment Required ?
+                                        <div>
+                                        <center>
+                                            <input   style="text-align: center;" type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="param[]" id="attachment_required" value="attachment_required"> &nbsp;&nbsp;&nbsp; Attachment Required ?
+                                        </center>
                                             <table class="table" style="display:none;" id="attach_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead>
                                                     <tr style="background: #317eeb;">

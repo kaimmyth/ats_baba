@@ -48,7 +48,17 @@ class CandidateforwardController extends Controller
     {
         //    return $Request->reference[0][0];
 
-
+// return $Request->param;
+$data_array=array();
+        foreach($Request->param as $key_request=>$value_request)
+        {
+            // $data_array[]=$value_request;
+           $data_array[$value_request] =$Request->input('' . $value_request);
+        // echo "<br>";
+        }
+        echo"<pre>";
+        print_r($data_array['reference']);
+        exit;
             //   return $Request->reference;
         //  return $Request->experience;
         $update_resume = $Request->update_Resume_file;
@@ -189,6 +199,8 @@ class CandidateforwardController extends Controller
         } else {
             $data = array('forward_candidate' => $forward_candidate, 'experience_list' => $experience_list, 'reference_list' => $reference_list, 'seeker_document' => @$seeker_document, 'extra_seeker_document' => @$extra_seeker_document);
         }
+        if($Request->Employer_required=="Employer_required")
+        {
         if ($Request->Companyemp_detail) {
             $emp_details = new tbl_forward_emp_details();
             $emp_details->forward_candidate_id = $forward_candidate->id;
@@ -203,7 +215,8 @@ class CandidateforwardController extends Controller
             $emp_details->save();
             $data['emp_details'] = $emp_details;
         }
-
+     }
+     return $data;
         Mail::send('emails.forward_candidate', ['data' => $data], function ($message) use ($data) {
             $email_to = explode(',', $data['forward_candidate']['forward_to']);
             foreach ($email_to as $key => $value) {

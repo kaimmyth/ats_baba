@@ -96,7 +96,7 @@
                                         <select class="form-control" name="group" id="group"
                                             style=" border: 1px solid #b3b3b3">
                                             @foreach($group as $group)
-                                            <option value="{{$group->type_ID}}">{{$group->type_name}}</option>
+                                            <option value="{{$group->type_ID}}" @if($data->team_member_type==$group->type_ID) {{'selected'}} @endif>{{$group->type_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -119,7 +119,7 @@
                                             style="color:red;">*</span></label>
                                     <div class="col-lg-8">
                                         <input class="form-control" id="password" name="password" placeholder="Password"
-                                            type="text" value="{{$data->pass_code}}">
+                                            type="password" >
                                         <span id="passwordcheck" name="passwordcheck">Value must have 6 characters or
                                             more</span>
                                     </div>
@@ -131,7 +131,7 @@
                                             style="color:red;">*</span></label>
                                     <div class="col-lg-8">
                                         <input class="form-control" id="confirm_password" name="confirm_password"
-                                            placeholder="Confirm Password" type="text">
+                                            placeholder="Confirm Password" type="password">
                                         <span id="cmfpascheck" name="cmfpascheck">Both password field must be
                                             same</span>
                                     </div>
@@ -147,7 +147,7 @@
 
                                     <option value="{{$data->country}}">{{$data->country}}</option>
                                         @foreach($toReturn['countries'] as $country)
-                                        <option value="{{$country['country_id']}}">{{ $country['country_name']}}
+                                        <option value="{{$country['country_id']}}" @if($data->country==$country['country_name']) {{'selected'}} @endif > {{ $country['country_name']}}
                                         </option>
                                         @endforeach
                                     </select>
@@ -188,212 +188,6 @@
                                     </div>
                                 </div> --}}
                                 <!--end of Home Phone -->
-
-                                <!--Location Time Zone-->
-                                {{-- <div class="form-group row">
-                                                <label class="col-sm-4 control-label">Location Time Zone<span style="color:red;">*</span></label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" id="timea" name="timea" style="max-width:60%; border: 1px solid #b3b3b3;">
-                                                        <option value="(GMT-12:00) International Date Line West">(GMT-12:00) International Date Line West</option>
-                                                        <option value="(GMT-11:00) Midway Island, Samoa">(GMT-11:00) Midway Island, Samoa</option>
-                                                        <option value="(GMT-10:00) Hawaii">(GMT-10:00) Hawaii</option>
-                                                        <option value="(GMT-09:00) Alaska">(GMT-09:00) Alaska</option>
-                                                        <option value="(GMT-08:00) Pacific Time (US & Canada)" selected="selected">(GMT-08:00) Pacific Time (US & Canada)</option>
-                                                        <option value="(GMT-08:00) Tijuana, Baja California">(GMT-08:00) Tijuana, Baja California</option>
-                                                        <option value="(GMT-07:00) Arizona">(GMT-07:00) Arizona</option>
-                                                        <option value="(GMT-07:00) Chihuahua, La Paz, Mazatlan">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                                                        <option value="(GMT-07:00) Mountain Time (US & Canada)">(GMT-07:00) Mountain Time (US & Canada)</option>
-                                                        <option value="(GMT-09:30) Marquesas Islands">(GMT-09:30) Marquesas Islands</option>
-                                                        <option value="(GMT-09:00) Gambier Islands">(GMT-09:00) Gambier Islands</option>
-                                                        <option value="(GMT-08:00) Pitcairn Islands">(GMT-08:00) Pitcairn Islands</option>
-                                                        <option value="(GMT-08:00) Pacific Time (US & Canada)" selected="selected">(GMT-08:00) Pacific Time (US & Canada)</option>
-                                                        <option value="(GMT-07:00) Mountain Time (US & Canada)">(GMT-07:00) Mountain Time (US & Canada)</option>
-                                                        <option value="(GMT-07:00) Chihuahua, La Paz, Mazatlan">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                                                        <option value="(GMT-06:00) Saskatchewan, Central America">(GMT-06:00) Saskatchewan, Central America</option>
-                                                        <option value="(GMT-06:00) Guadalajara, Mexico City, Monterrey">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
-                                                        <option value="(GMT-06:00) Easter Island">(GMT-06:00) Easter Island</option>
-                                                        <option value="(GMT-06:00) Central Time (US & Canada)">(GMT-06:00) Central Time (US & Canada)</option>
-                                                        <option value="(GMT-05:00) Eastern Time (US & Canada)">(GMT-05:00) Eastern Time (US & Canada)</option>
-                                                        <option value="(GMT-05:00) Cuba">(GMT-05:00) Cuba</option>
-                                                        <option value="(GMT-05:00) Bogota">(GMT-05:00) Bogota</option>
-                                                        <option value="(GMT-04:30) Caracas">(GMT-04:30) Caracas</option>
-                                                        <option value="(GMT-04:00) Santiago">(GMT-04:00) Santiago</option>
-                                                        <option value="(GMT-04:00) La Paz">(GMT-04:00) La Paz</option>
-                                                        <option value="(GMT-04:00) Faukland Islands">(GMT-04:00) Faukland Islands</option>
-                                                        <option value="(GMT-04:00) Brazil">(GMT-04:00) Brazil</option>
-                                                        <option value="(GMT-04:00) Atlantic Time (Goose Bay)">(GMT-04:00) Atlantic Time (Goose Bay)</option>
-                                                        <option value="(GMT-04:00) Atlantic Time (Canada)">(GMT-04:00) Atlantic Time (Canada)</option>
-                                                        <option value="(GMT-03:30) Newfoundland">(GMT-03:30) Newfoundland</option>
-                                                        <option value="(GMT-03:00) UTC-3">(GMT-03:00) UTC-3</option>
-                                                        <option value="(GMT-03:00) Montevideo">(GMT-03:00) Montevideo</option>
-                                                        <option value="(GMT-03:00) Miquelon, St. Pierre">(GMT-03:00) Miquelon, St. Pierre</option>
-                                                        <option value="(GMT-03:00) Greenland">(GMT-03:00) Greenland</option>
-                                                        <option value="(GMT-03:00) Buenos Aires">(GMT-03:00) Buenos Aires</option>
-                                                        <option value="(GMT-03:00) Brasilia">(GMT-03:00) Brasilia</option>
-                                                        <option value="(GMT-02:00) Mid-Atlantic">(GMT-02:00) Mid-Atlantic</option>
-                                                        <option value="(GMT-01:00) Cape Verde Is.">(GMT-01:00) Cape Verde Is.</option>
-                                                        <option value="(GMT-01:00) Azores">(GMT-01:00) Azores</option>
-                                                        <option value="(GMT) Greenwich Mean Time : Belfast">(GMT) Greenwich Mean Time : Belfast</option>
-                                                        <option value="(GMT) Greenwich Mean Time : Dublin">(GMT) Greenwich Mean Time : Dublin</option>
-                                                        <option value="(GMT) Greenwich Mean Time : Lisbon">(GMT) Greenwich Mean Time : Lisbon</option>
-                                                        <option value="(GMT) Greenwich Mean Time : London">(GMT) Greenwich Mean Time : London</option>
-                                                        <option value="(GMT) Monrovia, Reykjavik">(GMT) Monrovia, Reykjavik</option>
-                                                        <option value="(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
-                                                        <option value="(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
-                                                        <option value="(GMT+01:00) Brussels, Copenhagen, Madrid, Paris">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
-                                                        <option value="(GMT+01:00) West Central Africa">(GMT+01:00) West Central Africa</option>
-                                                        <option value="(GMT+01:00) Windhoek">(GMT+01:00) Windhoek</option>
-                                                        <option value="(GMT+02:00) Beirut">(GMT+02:00) Beirut</option>
-                                                        <option value="(GMT+02:00) Cairo">(GMT+02:00) Cairo</option>
-                                                        <option value="(GMT+02:00) Gaza">(GMT+02:00) Gaza</option>
-                                                        <option value="(GMT+02:00) Harare, Pretoria">(GMT+02:00) Harare, Pretoria</option>
-                                                        <option value="(GMT+02:00) Jerusalem">(GMT+02:00) Jerusalem</option>
-                                                        <option value="(GMT+02:00) Minsk">(GMT+02:00) Minsk</option>
-                                                        <option value="(GMT+02:00) Syria">(GMT+02:00) Syria</option>
-                                                        <option value="(GMT+03:00) Moscow, St. Petersburg, Volgograd">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
-                                                        <option value="(GMT+03:00) Nairobi">(GMT+03:00) Nairobi</option>
-                                                        <option value="(GMT+03:30) Tehran">(GMT+03:30) Tehran</option>
-                                                        <option value="(GMT+04:00) Abu Dhabi, Muscat">(GMT+04:00) Abu Dhabi, Muscat</option>
-                                                        <option value="(GMT+04:00) Yerevan">(GMT+04:00) Yerevan</option>
-                                                        <option value="(GMT+04:30) Kabul">(GMT+04:30) Kabul</option>
-                                                        <option value="(GMT+05:00) Ekaterinburg">(GMT+05:00) Ekaterinburg</option>
-                                                        <option value="(GMT+05:00) Tashkent">(GMT+05:00) Tashkent</option>
-                                                        <option value="(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
-                                                        <option value="(GMT+05:45) Kathmandu">(GMT+05:45) Kathmandu</option>
-                                                        <option value="(GMT+06:00) Astana, Dhaka">(GMT+06:00) Astana, Dhaka</option>
-                                                        <option value="(GMT+06:00) Novosibirsk">(GMT+06:00) Novosibirsk</option>
-                                                        <option value="(GMT+06:30) Yangon (Rangoon)">(GMT+06:30) Yangon (Rangoon)</option>
-                                                        <option value="(GMT+07:00) Bangkok, Hanoi, Jakarta">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
-                                                        <option value="(GMT+07:00) Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
-                                                        <option value="(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-                                                        <option value="(GMT+08:00) Irkutsk, Ulaan Bataar">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
-                                                        <option value="(GMT+08:00) Perth">(GMT+08:00) Perth</option>
-                                                        <option value="(GMT+08:45) Eucla">(GMT+08:45) Eucla</option>
-                                                        <option value="(GMT+09:00) Osaka">(GMT+09:00) Osaka</option>
-                                                        <option value="(GMT+09:00) Seoul">(GMT+09:00) Seoul</option>
-                                                        <option value="(GMT+09:00) Yakutsk">(GMT+09:00) Yakutsk</option>
-                                                        <option value="(GMT+09:30) Adelaide">(GMT+09:30) Adelaide</option>
-                                                        <option value="(GMT+09:30) Darwin">(GMT+09:30) Darwin</option>
-                                                        <option value="(GMT+10:00) Brisbane">(GMT+10:00) Brisbane</option>
-                                                        <option value="(GMT+10:00) Hobart">(GMT+10:00) Hobart</option>
-                                                        <option value="(GMT+10:00) Vladivostok">(GMT+10:00) Vladivostok</option>
-                                                        <option value="(GMT+10:30) Lord Howe Island">(GMT+10:30) Lord Howe Island</option>
-                                                        <option value="(GMT+11:00) Solomon Is., New Caledonia">(GMT+11:00) Solomon Is., New Caledonia</option>
-                                                        <option value="(GMT+11:00) Magadan">(GMT+11:00) Magadan</option>
-                                                        <option value="(GMT+11:30) Norfolk Island">(GMT+11:30) Norfolk Island</option>
-                                                        <option value="(GMT+12:00) Anadyr, Kamchatka">(GMT+12:00) Anadyr, Kamchatka</option>
-                                                        <option value="(GMT+12:00) Auckland, Wellington">(GMT+12:00) Auckland, Wellington</option>
-                                                        <option value="(GMT+12:00) Fiji, Kamchatka, Marshall Is.">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
-                                                        <option value="(GMT+12:45) Chatham Islands">(GMT+12:45) Chatham Islands</option>
-                                                        <option value="(GMT+13:00) Nukualofa">(GMT+13:00) Nukualofa</option>
-                                                        <option value="(GMT+14:00) Kiritimati">(GMT+14:00) Kiritimati</option>
-                                                    </select>
-                                                </div>
-                                            </div> --}}
-                                <!--end of Location Time Zone-->
-                                <!--Display Time Zone-->
-                                {{-- <div class="form-group row">
-                                                <label class="col-sm-4 control-label">Display Time Zone<span style="color:red;">*</span></label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control" id="timeb" name="timeb" style="max-width:60%; border: 1px solid #b3b3b3;">
-                                                        <option value="(GMT-12:00) International Date Line West">(GMT-12:00) International Date Line West</option>
-                                                        <option value="(GMT-11:00) Midway Island, Samoa">(GMT-11:00) Midway Island, Samoa</option>
-                                                        <option value="(GMT-10:00) Hawaii">(GMT-10:00) Hawaii</option>
-                                                        <option value="(GMT-09:00) Alaska">(GMT-09:00) Alaska</option>
-                                                        <option value="(GMT-08:00) Pacific Time (US & Canada)" selected="selected">(GMT-08:00) Pacific Time (US & Canada)</option>
-                                                        <option value="(GMT-08:00) Tijuana, Baja California">(GMT-08:00) Tijuana, Baja California</option>
-                                                        <option value="(GMT-07:00) Arizona">(GMT-07:00) Arizona</option>
-                                                        <option value="(GMT-07:00) Chihuahua, La Paz, Mazatlan">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                                                        <option value="(GMT-07:00) Mountain Time (US & Canada)">(GMT-07:00) Mountain Time (US & Canada)</option>
-                                                        <option value="(GMT-09:30) Marquesas Islands">(GMT-09:30) Marquesas Islands</option>
-                                                        <option value="(GMT-09:00) Gambier Islands">(GMT-09:00) Gambier Islands</option>
-                                                        <option value="(GMT-08:00) Pitcairn Islands">(GMT-08:00) Pitcairn Islands</option>
-                                                        <option value="(GMT-08:00) Pacific Time (US & Canada)" selected="selected">(GMT-08:00) Pacific Time (US & Canada)</option>
-                                                        <option value="(GMT-07:00) Mountain Time (US & Canada)">(GMT-07:00) Mountain Time (US & Canada)</option>
-                                                        <option value="(GMT-07:00) Chihuahua, La Paz, Mazatlan">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                                                        <option value="(GMT-06:00) Saskatchewan, Central America">(GMT-06:00) Saskatchewan, Central America</option>
-                                                        <option value="(GMT-06:00) Guadalajara, Mexico City, Monterrey">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
-                                                        <option value="(GMT-06:00) Easter Island">(GMT-06:00) Easter Island</option>
-                                                        <option value="(GMT-06:00) Central Time (US & Canada)">(GMT-06:00) Central Time (US & Canada)</option>
-                                                        <option value="(GMT-05:00) Eastern Time (US & Canada)">(GMT-05:00) Eastern Time (US & Canada)</option>
-                                                        <option value="(GMT-05:00) Cuba">(GMT-05:00) Cuba</option>
-                                                        <option value="(GMT-05:00) Bogota">(GMT-05:00) Bogota</option>
-                                                        <option value="(GMT-04:30) Caracas">(GMT-04:30) Caracas</option>
-                                                        <option value="(GMT-04:00) Santiago">(GMT-04:00) Santiago</option>
-                                                        <option value="(GMT-04:00) La Paz">(GMT-04:00) La Paz</option>
-                                                        <option value="(GMT-04:00) Faukland Islands">(GMT-04:00) Faukland Islands</option>
-                                                        <option value="(GMT-04:00) Brazil">(GMT-04:00) Brazil</option>
-                                                        <option value="(GMT-04:00) Atlantic Time (Goose Bay)">(GMT-04:00) Atlantic Time (Goose Bay)</option>
-                                                        <option value="(GMT-04:00) Atlantic Time (Canada)">(GMT-04:00) Atlantic Time (Canada)</option>
-                                                        <option value="(GMT-03:30) Newfoundland">(GMT-03:30) Newfoundland</option>
-                                                        <option value="(GMT-03:00) UTC-3">(GMT-03:00) UTC-3</option>
-                                                        <option value="(GMT-03:00) Montevideo">(GMT-03:00) Montevideo</option>
-                                                        <option value="(GMT-03:00) Miquelon, St. Pierre">(GMT-03:00) Miquelon, St. Pierre</option>
-                                                        <option value="(GMT-03:00) Greenland">(GMT-03:00) Greenland</option>
-                                                        <option value="(GMT-03:00) Buenos Aires">(GMT-03:00) Buenos Aires</option>
-                                                        <option value="(GMT-03:00) Brasilia">(GMT-03:00) Brasilia</option>
-                                                        <option value="(GMT-02:00) Mid-Atlantic">(GMT-02:00) Mid-Atlantic</option>
-                                                        <option value="(GMT-01:00) Cape Verde Is.">(GMT-01:00) Cape Verde Is.</option>
-                                                        <option value="(GMT-01:00) Azores">(GMT-01:00) Azores</option>
-                                                        <option value="(GMT) Greenwich Mean Time : Belfast">(GMT) Greenwich Mean Time : Belfast</option>
-                                                        <option value="(GMT) Greenwich Mean Time : Dublin">(GMT) Greenwich Mean Time : Dublin</option>
-                                                        <option value="(GMT) Greenwich Mean Time : Lisbon">(GMT) Greenwich Mean Time : Lisbon</option>
-                                                        <option value="(GMT) Greenwich Mean Time : London">(GMT) Greenwich Mean Time : London</option>
-                                                        <option value="(GMT) Monrovia, Reykjavik">(GMT) Monrovia, Reykjavik</option>
-                                                        <option value="(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
-                                                        <option value="(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
-                                                        <option value="(GMT+01:00) Brussels, Copenhagen, Madrid, Paris">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
-                                                        <option value="(GMT+01:00) West Central Africa">(GMT+01:00) West Central Africa</option>
-                                                        <option value="(GMT+01:00) Windhoek">(GMT+01:00) Windhoek</option>
-                                                        <option value="(GMT+02:00) Beirut">(GMT+02:00) Beirut</option>
-                                                        <option value="(GMT+02:00) Cairo">(GMT+02:00) Cairo</option>
-                                                        <option value="(GMT+02:00) Gaza">(GMT+02:00) Gaza</option>
-                                                        <option value="(GMT+02:00) Harare, Pretoria">(GMT+02:00) Harare, Pretoria</option>
-                                                        <option value="(GMT+02:00) Jerusalem">(GMT+02:00) Jerusalem</option>
-                                                        <option value="(GMT+02:00) Minsk">(GMT+02:00) Minsk</option>
-                                                        <option value="(GMT+02:00) Syria">(GMT+02:00) Syria</option>
-                                                        <option value="(GMT+03:00) Moscow, St. Petersburg, Volgograd">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
-                                                        <option value="(GMT+03:00) Nairobi">(GMT+03:00) Nairobi</option>
-                                                        <option value="(GMT+03:30) Tehran">(GMT+03:30) Tehran</option>
-                                                        <option value="(GMT+04:00) Abu Dhabi, Muscat">(GMT+04:00) Abu Dhabi, Muscat</option>
-                                                        <option value="(GMT+04:00) Yerevan">(GMT+04:00) Yerevan</option>
-                                                        <option value="(GMT+04:30) Kabul">(GMT+04:30) Kabul</option>
-                                                        <option value="(GMT+05:00) Ekaterinburg">(GMT+05:00) Ekaterinburg</option>
-                                                        <option value="(GMT+05:00) Tashkent">(GMT+05:00) Tashkent</option>
-                                                        <option value="(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
-                                                        <option value="(GMT+05:45) Kathmandu">(GMT+05:45) Kathmandu</option>
-                                                        <option value="(GMT+06:00) Astana, Dhaka">(GMT+06:00) Astana, Dhaka</option>
-                                                        <option value="(GMT+06:00) Novosibirsk">(GMT+06:00) Novosibirsk</option>
-                                                        <option value="(GMT+06:30) Yangon (Rangoon)">(GMT+06:30) Yangon (Rangoon)</option>
-                                                        <option value="(GMT+07:00) Bangkok, Hanoi, Jakarta">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
-                                                        <option value="(GMT+07:00) Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
-                                                        <option value="(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-                                                        <option value="(GMT+08:00) Irkutsk, Ulaan Bataar">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
-                                                        <option value="(GMT+08:00) Perth">(GMT+08:00) Perth</option>
-                                                        <option value="(GMT+08:45) Eucla">(GMT+08:45) Eucla</option>
-                                                        <option value="(GMT+09:00) Osaka">(GMT+09:00) Osaka</option>
-                                                        <option value="(GMT+09:00) Seoul">(GMT+09:00) Seoul</option>
-                                                        <option value="(GMT+09:00) Yakutsk">(GMT+09:00) Yakutsk</option>
-                                                        <option value="(GMT+09:30) Adelaide">(GMT+09:30) Adelaide</option>
-                                                        <option value="(GMT+09:30) Darwin">(GMT+09:30) Darwin</option>
-                                                        <option value="(GMT+10:00) Brisbane">(GMT+10:00) Brisbane</option>
-                                                        <option value="(GMT+10:00) Hobart">(GMT+10:00) Hobart</option>
-                                                        <option value="(GMT+10:00) Vladivostok">(GMT+10:00) Vladivostok</option>
-                                                        <option value="(GMT+10:30) Lord Howe Island">(GMT+10:30) Lord Howe Island</option>
-                                                        <option value="(GMT+11:00) Solomon Is., New Caledonia">(GMT+11:00) Solomon Is., New Caledonia</option>
-                                                        <option value="(GMT+11:00) Magadan">(GMT+11:00) Magadan</option>
-                                                        <option value="(GMT+11:30) Norfolk Island">(GMT+11:30) Norfolk Island</option>
-                                                        <option value="(GMT+12:00) Anadyr, Kamchatka">(GMT+12:00) Anadyr, Kamchatka</option>
-                                                        <option value="(GMT+12:00) Auckland, Wellington">(GMT+12:00) Auckland, Wellington</option>
-                                                        <option value="(GMT+12:00) Fiji, Kamchatka, Marshall Is.">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
-                                                        <option value="(GMT+12:45) Chatham Islands">(GMT+12:45) Chatham Islands</option>
-                                                        <option value="(GMT+13:00) Nukualofa">(GMT+13:00) Nukualofa</option>
-                                                        <option value="(GMT+14:00) Kiritimati">(GMT+14:00) Kiritimati</option>
-                                                    </select>
-                                                </div>
-                                            </div> --}}
-                                <!--end of Display Time Zone-->
-
                                 <!--Jobs History-->
                                 <div class="form-group row">
                                     <label class="col-sm-4 control-label">Jobs History <span
@@ -683,13 +477,26 @@
             var cmfpassd_val = $("#confirm_password").val();
             var passd_val = $("#password").val();
             if (cmfpassd_val.length != passd_val.length) {
+
                 $("#cmfpascheck").show();
                 $("#cmfpascheck").focus();
                 $("#cmfpascheck").css("color", "red");
                 err_check_cmfpsd = false;
                 return false;
             } else {
-                $("#cmfpascheck").hide();
+                if (cmfpassd_val!= passd_val) {
+                    $("#cmfpascheck").show();
+                $("#cmfpascheck").focus();
+                $("#cmfpascheck").css("color", "red");
+                err_check_cmfpsd = false;
+                return false;
+                }
+                else
+                {
+                    $("#cmfpascheck").hide();
+                return true;
+                }
+                
             }
         }
 
@@ -716,8 +523,6 @@
 //Validation Form Personal Information
 <script>
     $(document).ready(function () {
-
-
         $("#citycheck").hide();
         $("#phcheck").hide();
         $("#homephcheck").hide();
@@ -874,14 +679,18 @@
             err_city = true;
             err_jobhistory = true;
             err_state = true;
+            err_check_cmfpsd=true;
+            err_check_psw=true;
             // check_file();
             check_phone();
             check_home_phone();
             check_loc();
             check_state();
+            check_cmfpassd();
+            check_passd();
             // if ((err_ph == true) && (err_home_ph == true) && (err_city == true) && (err_file == true) &&
             //     (err_jobhistory = true) && (err_state = true)) {
-            if ((err_ph == true) && (err_home_ph == true) && (err_city == true) && (err_jobhistory = true) && (err_state = true)) {
+            if ((err_ph == true) && (err_check_cmfpsd== true) && (err_check_psw==true) && (err_home_ph == true) && (err_city == true) && (err_jobhistory = true) && (err_state = true)) {
                 return true;
             } else {
                 return false;

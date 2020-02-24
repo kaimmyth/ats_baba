@@ -208,28 +208,35 @@
                     <div class="card-body">
                         <style>
                         </style>
+                        @if(@$team_member_id!="")
                         @php
                         $team_member_details_name=DB::table('tbl_team_member')->where('ID',$team_member_id)->first();
                         @endphp
                         <h3>{{@$team_member_details_name->full_name}} </h3>
-                        <h3></h3>
+                        @else
+                        @php
+                       $tbl_team_member_type_details= DB::table('tbl_team_member_type')->where('type_ID',$team_id)->first();
+                       @endphp
+                       <h3>{{@$tbl_team_member_type_details->type_name}} </h3>
+                        @endif
                         <h4>Assigned Jobs</h4>
                         <table class="table">
                             <thead>
                                 <tr>
-                                <th>Si No.</th>
+                                <th>SI No.</th>
                                 <th>Date</th>
                                 <th>Team Memeber Name</th>
                                 <th>Job Code</th>
                                 <th>Job Title</th>
-                                <th>No Of Submit Resume</th>
+                                <th>No. Of Client Submittal</th>
                             </tr>
                             </thead>
                             <tbody>
+                                @php $si_no=1; @endphp
                                 @foreach($post_assign as $key_post=>$value_post)
                                     @foreach($value_post as $key_temp=>$value_temp)
                                         <tr>
-                                            <td>{{$key_temp+1}}</td>
+                                            <td>{{$si_no++}}</td>
                                             <td>{{$value_temp['job_assigned_date']}}</td>
                                             <td>{{$value_temp['full_name']}}</td>
                                             <td>{{$value_temp['job_code']}}</td>
@@ -279,6 +286,8 @@
             success: function(data) {
                 console.log(data);
                 var append="";
+                append+="<option value=" + '""' +
+                        ">--select--</option>";
                 $.each(data, function(index, value) {
                     append+="<option value=" + '"' + value.type_ID + '"' +
                         ">" + value.type_name + "</option>";
@@ -302,6 +311,8 @@
             success: function(data) {
                 console.log(data);
                 var append="";
+                append+="<option value=" + '""' +
+                        ">--select--</option>";
                 $.each(data, function(index, value) {
                     append+="<option value=" + '"' + value.ID + '"' +
                         ">" + value.full_name + "</option>";
@@ -318,6 +329,8 @@
     {
     var  status=$(e).val();
     // alert(status);
+    $("#data_interval").html("");
+
     $.ajax({
             type: 'get',
             url: '{{url("employer/report/get_date")}}' + "/" + status,
@@ -325,6 +338,8 @@
                 console.log(data.date_d);
                 var append="";
                 // for()
+                append+="<option value=" + '""' +
+                        ">--select--</option>";
                 $.each(data.date_d, function(index, value) {
                     append+="<option value=" + '"' + value+ '"' +
                         ">" + value+ "</option>";
