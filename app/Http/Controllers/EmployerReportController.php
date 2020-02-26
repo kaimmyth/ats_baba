@@ -21,7 +21,7 @@ class EmployerReportController extends Controller
     }
     public function genrate_report(Request $request)
     {
-
+        return $request;
         $report_type = $request->type;
         $team_id = $request->team;
         $report_status = $request->status;
@@ -79,7 +79,6 @@ class EmployerReportController extends Controller
                 }
             }
         }
-        // return $toReturn;
          return view("Report.view_report")->with(['toReturn' => @$toReturn,  'post_assign' => @$post_assign, 'report_type' => @$report_type, 'team_id' => @$team_id, 'team_member_id' => @$team_member_id, 'report_status' => @$report_status]);
     }
     public function genrate_report_old(Request $request)
@@ -222,7 +221,6 @@ class EmployerReportController extends Controller
         // print_r($status);
         $date_array = array();
         if ($status == 1) {
-            // echo "dfsdf";
             for ($i = 0; $i < 5; $i++) {
                 $date_array['date_d'][] = date('Y-m-d', strtotime('-' . $i*7 . ' days'));
                 // $date_array['date_d'][]=date($date_array['date_d'],strtotime('-1 days'));
@@ -230,7 +228,6 @@ class EmployerReportController extends Controller
         }
         if($status==2)
         {
-            // echo "dfsdf";
             for($j=0;$j<5;$j++)
             {
                 $date_array['date_d'][]=date('Y-m-d', strtotime('-'. $j*7 .' days'));
@@ -239,14 +236,12 @@ class EmployerReportController extends Controller
         }
         if($status==3)
         {
-            // echo "dfsdf";
             for($j=0;$j<5;$j++)
             {
                 $date_array['date_d'][]=date('Y-m-d', strtotime('-'. $j*30 .' days'));
                 // $date_array['date_d'][]=date($date_array['date_d'],strtotime('-1 days'));
             }
         }
-        // $date_array =date('Y-m-d', strtotime('-7 days'));
         return $date_array;
     }
 }

@@ -46,21 +46,6 @@ class CandidateforwardController extends Controller
     }
     public function forward_candidate(Request $Request)
     {
-        //    return $Request->reference[0][0];
-
-// return $Request->param;
-$data_array=array();
-        foreach($Request->param as $key_request=>$value_request)
-        {
-            // $data_array[]=$value_request;
-           $data_array[$value_request] =$Request->input('' . $value_request);
-        // echo "<br>";
-        }
-        echo"<pre>";
-        print_r($data_array['reference']);
-        exit;
-            //   return $Request->reference;
-        //  return $Request->experience;
         $update_resume = $Request->update_Resume_file;
         $experience_list = $Request->experience;
         $reference_list = $Request->reference;
@@ -216,7 +201,7 @@ $data_array=array();
             $data['emp_details'] = $emp_details;
         }
      }
-     return $data;
+    //  return $data;
         Mail::send('emails.forward_candidate', ['data' => $data], function ($message) use ($data) {
             $email_to = explode(',', $data['forward_candidate']['forward_to']);
             foreach ($email_to as $key => $value) {

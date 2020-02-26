@@ -17,6 +17,7 @@ use App\tbl_team_member;
 use DateTime;
 // use Illuminate\Support\Carbon;
 use Illuminate\Support\Carbon;
+use Session;
 
 class Import_Controller extends Controller
 {
@@ -94,28 +95,54 @@ class Import_Controller extends Controller
 			});
 		})->download('xls');
 	}
-	public function exportclientsubmittaldaily($id = "", $name = "", $date = "")
+	public function exportclientsubmittaldaily(Request $request)
 	{
+		// return $request;
+		$date = $request->week_date;
+		$id = $request->data_id;
+		$name = $request->name;
+
 		$date = date('Y-m-d', strtotime(str_replace('-', '/', $date)));
-		$team_memeber = tbl_team_member::where('ID', $id)->first('email');
+		$team_memeber = tbl_team_member::where('ID', $id)->first();
+		$team_id = $team_memeber['team_member_type'];
 		$candidate_email = $team_memeber['email'];
-		$data = array(1 => array("Cilent Submittal Report"));
-		$data[] = array('Sl. No.', 'Recruiter Mail ID', 'Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location', 'Pay Rate', 'Employer Name', 'Empolyer Mail Id', 'Client Name', 'Bill Rate');
+		// return $candidate_email;
+		$user_type = Session::get('type');
+		// return $user_type;
+		if ($user_type == "teammember") {
+			$data = array(1 => array("Cilent Submittal Report"));
+			$data[] = array('Sl. No.', 'Recruiter Mail ID', 'Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location', 'Pay Rate', 'Employer Name', 'Empolyer Mail Id', 'Client Name', 'Bill Rate');
+			// $data[] = array('Sl. No.', 'Recruiter Name','Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location','Candidate Qualification','Pay Rate','Employer Name','Empolyer Mail','Client Name','Bill Rate');
+			$toReturn = Tbl_forward_candidate::leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
+				->leftjoin('tbl_forward_candidate_reference', 'tbl_forward_candidate_reference.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
+				->leftjoin('tbl_forward_candidate_exp_required', 'tbl_forward_candidate_exp_required.forward_candidate_id', '=', 'tbl_forward_candidate.job_id')
+				->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_forward_candidate.job_seeker_id')
+				->leftjoin('tbl_forward_emp_details', 'tbl_forward_emp_details.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
+				->select('tbl_forward_emp_details.employer_name as employer_name', 'tbl_forward_emp_details.phone_number as emp_phone_number', 'tbl_forward_emp_details.email_Id as emp_email_Id', 'tbl_job_seekers.skype_id as candidate_skype_id', 'tbl_job_seekers.country as canidate_country', 'tbl_job_seekers.state as candaite_state', 'tbl_job_seekers.city as candiate_city', 'tbl_job_seekers.mobile as candiate_mobile', 'tbl_post_jobs.pay_min as job_pay_min', 'tbl_post_jobs.pay_max as job_pay_max', 'tbl_post_jobs.client_name as job_client_name', 'tbl_post_jobs.job_title as job_title', 'tbl_forward_candidate.expectedrate as submital_rate', 'tbl_forward_candidate.forward_by as forward_by', 'tbl_forward_candidate.forward_to as forward_to', 'tbl_forward_candidate.fullname as submittal_fullname', 'tbl_forward_candidate.visa_status as submittal_visa_status')
+				// ->select('tbl_job_seekers.first_name as candiate_f_name','tbl_job_seekers.last_name as candidate_l_name','tbl_job_seekers.skype_id as candidate_skype_id','tbl_job_seekers.country as canidate_country','tbl_job_seekers.state as candaite_state','tbl_job_seekers.city as candiate_city','tbl_job_seekers.mobile as candiate_mobile','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.pay_max as job_pay_max','tbl_post_jobs.client_name as job_client_name','tbl_post_jobs.job_title as job_title','tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_forward_candidate.expectedrate as submital_rate','tbl_forward_candidate.forward_by as forward_by','tbl_forward_candidate.forward_to as forward_to','tbl_forward_candidate.fullname as submittal_fullname','tbl_forward_candidate.visa_status as submittal_visa_status')
+				// select('tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_post_jobs.job_title as job_title','tbl_post_jobs.job_code as job_code','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.job_mode as job_mode','tbl_post_jobs.job_duration as job_duration','tbl_post_jobs.pay_max as job_pay_max','tbl_forward_candidate.expectedrate as expectedrate','tbl_forward_candidate.fullname as candiadate_name','tbl_forward_candidate.city as candidate_city','tbl_forward_candidate.state as candidate_state','tbl_forward_candidate.','tbl_forward_candidate.visa_status as visa_type')
+				->whereDate('forward_date', '02-20-2020')->where('forward_by', $candidate_email)->get()->toArray();
+		} else {
+			$team_memeber_id = tbl_team_member::where('team_member_type', $team_id)->pluck('ID');
+			$team_memeber_email = tbl_team_member::where('team_member_type', $team_id)->pluck('email');
+			$data = array(1 => array("Cilent Submittal Report"));
+			$data[] = array('Sl. No.', 'Recruiter Mail ID', 'Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location', 'Pay Rate', 'Employer Name', 'Empolyer Mail Id', 'Client Name', 'Bill Rate');
+			// $data[] = array('Sl. No.', 'Recruiter Name','Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location','Candidate Qualification','Pay Rate','Employer Name','Empolyer Mail','Client Name','Bill Rate');
+			$toReturn = Tbl_forward_candidate::leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
+				->leftjoin('tbl_forward_candidate_reference', 'tbl_forward_candidate_reference.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
+				->leftjoin('tbl_forward_candidate_exp_required', 'tbl_forward_candidate_exp_required.forward_candidate_id', '=', 'tbl_forward_candidate.job_id')
+				->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_forward_candidate.job_seeker_id')
+				->leftjoin('tbl_forward_emp_details', 'tbl_forward_emp_details.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
+				->select('tbl_forward_emp_details.employer_name as employer_name', 'tbl_forward_emp_details.phone_number as emp_phone_number', 'tbl_forward_emp_details.email_Id as emp_email_Id', 'tbl_job_seekers.skype_id as candidate_skype_id', 'tbl_job_seekers.country as canidate_country', 'tbl_job_seekers.state as candaite_state', 'tbl_job_seekers.city as candiate_city', 'tbl_job_seekers.mobile as candiate_mobile', 'tbl_post_jobs.pay_min as job_pay_min', 'tbl_post_jobs.pay_max as job_pay_max', 'tbl_post_jobs.client_name as job_client_name', 'tbl_post_jobs.job_title as job_title', 'tbl_forward_candidate.expectedrate as submital_rate', 'tbl_forward_candidate.forward_by as forward_by', 'tbl_forward_candidate.forward_to as forward_to', 'tbl_forward_candidate.fullname as submittal_fullname', 'tbl_forward_candidate.visa_status as submittal_visa_status')
+				// ->select('tbl_job_seekers.first_name as candiate_f_name','tbl_job_seekers.last_name as candidate_l_name','tbl_job_seekers.skype_id as candidate_skype_id','tbl_job_seekers.country as canidate_country','tbl_job_seekers.state as candaite_state','tbl_job_seekers.city as candiate_city','tbl_job_seekers.mobile as candiate_mobile','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.pay_max as job_pay_max','tbl_post_jobs.client_name as job_client_name','tbl_post_jobs.job_title as job_title','tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_forward_candidate.expectedrate as submital_rate','tbl_forward_candidate.forward_by as forward_by','tbl_forward_candidate.forward_to as forward_to','tbl_forward_candidate.fullname as submittal_fullname','tbl_forward_candidate.visa_status as submittal_visa_status')
+				// select('tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_post_jobs.job_title as job_title','tbl_post_jobs.job_code as job_code','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.job_mode as job_mode','tbl_post_jobs.job_duration as job_duration','tbl_post_jobs.pay_max as job_pay_max','tbl_forward_candidate.expectedrate as expectedrate','tbl_forward_candidate.fullname as candiadate_name','tbl_forward_candidate.city as candidate_city','tbl_forward_candidate.state as candidate_state','tbl_forward_candidate.','tbl_forward_candidate.visa_status as visa_type')
+				->whereDate('forward_date', $date)
+				->whereIn('forward_by', $team_memeber_email)
+				->get()->toArray();
+		}
 
-		// $data[] = array('Sl. No.', 'Recruiter Name','Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location','Candidate Qualification','Pay Rate','Employer Name','Empolyer Mail','Client Name','Bill Rate');
-		$toReturn = Tbl_forward_candidate::leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
-			->leftjoin('tbl_forward_candidate_reference', 'tbl_forward_candidate_reference.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
-			->leftjoin('tbl_forward_candidate_exp_required', 'tbl_forward_candidate_exp_required.forward_candidate_id', '=', 'tbl_forward_candidate.job_id')
-			->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_forward_candidate.job_seeker_id')
-			->leftjoin('tbl_forward_emp_details', 'tbl_forward_emp_details.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
-			->select('tbl_forward_emp_details.employer_name as employer_name', 'tbl_forward_emp_details.phone_number as emp_phone_number', 'tbl_forward_emp_details.email_Id as emp_email_Id', 'tbl_job_seekers.skype_id as candidate_skype_id', 'tbl_job_seekers.country as canidate_country', 'tbl_job_seekers.state as candaite_state', 'tbl_job_seekers.city as candiate_city', 'tbl_job_seekers.mobile as candiate_mobile', 'tbl_post_jobs.pay_min as job_pay_min', 'tbl_post_jobs.pay_max as job_pay_max', 'tbl_post_jobs.client_name as job_client_name', 'tbl_post_jobs.job_title as job_title', 'tbl_forward_candidate.expectedrate as submital_rate', 'tbl_forward_candidate.forward_by as forward_by', 'tbl_forward_candidate.forward_to as forward_to', 'tbl_forward_candidate.fullname as submittal_fullname', 'tbl_forward_candidate.visa_status as submittal_visa_status')
-
-			// ->select('tbl_job_seekers.first_name as candiate_f_name','tbl_job_seekers.last_name as candidate_l_name','tbl_job_seekers.skype_id as candidate_skype_id','tbl_job_seekers.country as canidate_country','tbl_job_seekers.state as candaite_state','tbl_job_seekers.city as candiate_city','tbl_job_seekers.mobile as candiate_mobile','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.pay_max as job_pay_max','tbl_post_jobs.client_name as job_client_name','tbl_post_jobs.job_title as job_title','tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_forward_candidate.expectedrate as submital_rate','tbl_forward_candidate.forward_by as forward_by','tbl_forward_candidate.forward_to as forward_to','tbl_forward_candidate.fullname as submittal_fullname','tbl_forward_candidate.visa_status as submittal_visa_status')
-			// select('tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_post_jobs.job_title as job_title','tbl_post_jobs.job_code as job_code','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.job_mode as job_mode','tbl_post_jobs.job_duration as job_duration','tbl_post_jobs.pay_max as job_pay_max','tbl_forward_candidate.expectedrate as expectedrate','tbl_forward_candidate.fullname as candiadate_name','tbl_forward_candidate.city as candidate_city','tbl_forward_candidate.state as candidate_state','tbl_forward_candidate.','tbl_forward_candidate.visa_status as visa_type')
-			->whereDate('forward_date', $date)->where('forward_by', $candidate_email)->get()->toArray();
-
+		// return $toReturn;
 		foreach ($toReturn as $key => $value) {
-
 			// print_r($value);
 			$data[] = array(
 				$key + 1,
@@ -131,103 +158,72 @@ class Import_Controller extends Controller
 				$value['submital_rate']
 			);
 		}
-		// echo "<pre>";
-		// 	print_r($data);
-		// 	exit;
+		// 		echo "<pre>";
+		// 			print_r($data);
+		// 			exit;
 		// 		return $toReturn;
-		\Excel::create('Client_Submittal_report' . $name . $date, function ($excel) use ($data) {
-
+		// 		exit;
+		@\Excel::create('Client_Submittal_report' . $name . $date, function ($excel) use ($data) {
 			// Set the title
 			$excel->setTitle('Client_Submittal_report');
 
 			// Chain the setters
 			$excel->setCreator('Paatham')->setCompany('Paatham');
 
-			$excel->sheet('client Submittal', function ($sheet) use ($data) {
+			$excel->sheet('client_Submittal', function ($sheet) use ($data) {
 				// $sheet->freezePane('A3');
 				$sheet->fromArray($data);
-				// $sheet->fromArray($toReturn, null, true, false);
-				// $sheet->setColumnFormat(array('I1' => '@'));
-			});
-		})->download('xls');
-		return $id;
-	}
-
-	public function exportExcelFunctiuonforasset()
-	{
-		$data = array(1 => array("Asset data  Sheet"));
-		$data[] = array('Sl. No.', 'Name', 'Type', 'Department Name', 'Date');
-
-		$items =  Asset::leftJoin('department', 'asset.dept_id', '=', 'department.dept_id')
-			->leftJoin('asset_cat', 'asset.category_id', '=', 'asset_cat.asset_cat_id')
-			->leftJoin('asset_subcat', 'asset.subcategory_id', '=', 'asset_subcat.asset_sub_id')
-			->select('asset.asset_id as slId', 'asset.asset_name', 'asset.movable', 'department.dept_name', 'asset.created_at as createdDate')
-			->orderBy('asset.asset_id', 'desc')
-			->get();
-
-		foreach ($items as $key => $value) {
-			if ($value->movable == 1) {
-				$value->movable = "Movable";
-			} else {
-				$value->movable = "Immovable";
-			}
-			$value->createdDate = date('d/m/Y', strtotime($value->createdDate));
-			$data[] = array(
-				$key + 1,
-				$value->asset_name,
-				$value->movable,
-				$value->dept_name,
-				$value->createdDate,
-			);
-		}
-		\Excel::create('Asset_data', function ($excel) use ($data) {
-
-			// Set the title
-			$excel->setTitle('Asset data Sheet');
-
-			// Chain the setters
-			$excel->setCreator('Seraikela')->setCompany('Seraikela');
-
-			$excel->sheet('Fees', function ($sheet) use ($data) {
-				$sheet->freezePane('A3');
-				$sheet->mergeCells('A1:I1');
-				$sheet->fromArray($data, null, 'A1', true, false);
-				$sheet->setColumnFormat(array('I1' => '@'));
 			});
 		})->download('xls');
 	}
-	public function exportclientsubmittalmontly($id = "", $name = "", $date = "")
+
+	public function exportclientsubmittalmontly(Request $request)
 	{
-		$date_arary=explode("-",$date);
-		$date=array("0"=>$date_arary[0]);
-		$date=implode("-",$date);
-		// return $date;
-		// $date=str_replace('-', '/', $date);
-		// $date = date('M-Y',strtotime($date));
-		
-		$team_memeber = tbl_team_member::where('ID', $id)->first('email');
+		// $id = "", $name = "", $date = ""
+		$date_arary = explode("-", $request->week_date);
+		// $date = array("0" => $date_arary[0]);
+		$date = implode("-", $date_arary);
+		$team_memeber = tbl_team_member::where('ID', $request->data_id)->first();
+		$team_id = $team_memeber['team_member_type'];
 		$candidate_email = $team_memeber['email'];
+		$user_type = Session::get('type');
+		// return $user_type;
+		if ($user_type == "teammember") {
 		$data = array(1 => array("Cilent Submittal Report"));
 		$data[] = array('Sl. No.', 'Recruiter Mail ID', 'Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location', 'Pay Rate', 'Employer Name', 'Empolyer Mail Id', 'Client Name', 'Bill Rate');
-
 		// $data[] = array('Sl. No.', 'Recruiter Name','Job Titile', 'Candidate Name', 'Candidate Phone No.', 'Candidate location','Candidate Qualification','Pay Rate','Employer Name','Empolyer Mail','Client Name','Bill Rate');
-		$toReturn = Tbl_forward_candidate::
-			leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
+		$toReturn = Tbl_forward_candidate::leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
 			->leftjoin('tbl_forward_candidate_reference', 'tbl_forward_candidate_reference.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
 			->leftjoin('tbl_forward_candidate_exp_required', 'tbl_forward_candidate_exp_required.forward_candidate_id', '=', 'tbl_forward_candidate.job_id')
 			->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_forward_candidate.job_seeker_id')
 			->leftjoin('tbl_forward_emp_details', 'tbl_forward_emp_details.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
 			->select('tbl_forward_emp_details.employer_name as employer_name', 'tbl_forward_emp_details.phone_number as emp_phone_number', 'tbl_forward_emp_details.email_Id as emp_email_Id', 'tbl_job_seekers.skype_id as candidate_skype_id', 'tbl_job_seekers.country as canidate_country', 'tbl_job_seekers.state as candaite_state', 'tbl_job_seekers.city as candiate_city', 'tbl_job_seekers.mobile as candiate_mobile', 'tbl_post_jobs.pay_min as job_pay_min', 'tbl_post_jobs.pay_max as job_pay_max', 'tbl_post_jobs.client_name as job_client_name', 'tbl_post_jobs.job_title as job_title', 'tbl_forward_candidate.expectedrate as submital_rate', 'tbl_forward_candidate.forward_by as forward_by', 'tbl_forward_candidate.forward_to as forward_to', 'tbl_forward_candidate.fullname as submittal_fullname', 'tbl_forward_candidate.visa_status as submittal_visa_status')
-
-			->select('tbl_job_seekers.first_name as candiate_f_name','tbl_job_seekers.last_name as candidate_l_name','tbl_job_seekers.skype_id as candidate_skype_id','tbl_job_seekers.country as canidate_country','tbl_job_seekers.state as candaite_state','tbl_job_seekers.city as candiate_city','tbl_job_seekers.mobile as candiate_mobile','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.pay_max as job_pay_max','tbl_post_jobs.client_name as job_client_name','tbl_post_jobs.job_title as job_title','tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_forward_candidate.expectedrate as submital_rate','tbl_forward_candidate.forward_by as forward_by','tbl_forward_candidate.forward_to as forward_to','tbl_forward_candidate.fullname as submittal_fullname','tbl_forward_candidate.visa_status as submittal_visa_status')
+			->select('tbl_job_seekers.first_name as candiate_f_name', 'tbl_job_seekers.last_name as candidate_l_name', 'tbl_job_seekers.skype_id as candidate_skype_id', 'tbl_job_seekers.country as canidate_country', 'tbl_job_seekers.state as candaite_state', 'tbl_job_seekers.city as candiate_city', 'tbl_job_seekers.mobile as candiate_mobile', 'tbl_post_jobs.pay_min as job_pay_min', 'tbl_post_jobs.pay_max as job_pay_max', 'tbl_post_jobs.client_name as job_client_name', 'tbl_post_jobs.job_title as job_title', 'tbl_forward_candidate_reference.location as referencelocation', 'tbl_forward_candidate_reference.clientName as referenceclientName', 'tbl_forward_candidate_reference.designation as referencedesignation', 'tbl_forward_candidate_reference.officialEmail as officialEmail', 'tbl_forward_candidate.expectedrate as submital_rate', 'tbl_forward_candidate.forward_by as forward_by', 'tbl_forward_candidate.forward_to as forward_to', 'tbl_forward_candidate.fullname as submittal_fullname', 'tbl_forward_candidate.visa_status as submittal_visa_status')
 			// select('tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_post_jobs.job_title as job_title','tbl_post_jobs.job_code as job_code','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.job_mode as job_mode','tbl_post_jobs.job_duration as job_duration','tbl_post_jobs.pay_max as job_pay_max','tbl_forward_candidate.expectedrate as expectedrate','tbl_forward_candidate.fullname as candiadate_name','tbl_forward_candidate.city as candidate_city','tbl_forward_candidate.state as candidate_state','tbl_forward_candidate.','tbl_forward_candidate.visa_status as visa_type')
-			->whereMonth('forward_date', '=',$date)
+			->whereMonth('forward_date', '=', $date)
 			->where('forward_by', $candidate_email)
+			->orderBy('tbl_forward_candidate.ID','DESC')
 			->get()->toArray();
-			// echo "<pre>";
+		}
+		else
+		{
+			$team_memeber_email = tbl_team_member::where('team_member_type', $team_id)->pluck('email');
+			$toReturn = Tbl_forward_candidate::leftjoin('tbl_post_jobs', 'tbl_post_jobs.ID', '=', 'tbl_forward_candidate.job_id')
+			->leftjoin('tbl_forward_candidate_reference', 'tbl_forward_candidate_reference.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
+			->leftjoin('tbl_forward_candidate_exp_required', 'tbl_forward_candidate_exp_required.forward_candidate_id', '=', 'tbl_forward_candidate.job_id')
+			->leftjoin('tbl_job_seekers', 'tbl_job_seekers.ID', '=', 'tbl_forward_candidate.job_seeker_id')
+			->leftjoin('tbl_forward_emp_details', 'tbl_forward_emp_details.forward_candidate_id', '=', 'tbl_forward_candidate.ID')
+			->select('tbl_forward_emp_details.employer_name as employer_name', 'tbl_forward_emp_details.phone_number as emp_phone_number', 'tbl_forward_emp_details.email_Id as emp_email_Id', 'tbl_job_seekers.skype_id as candidate_skype_id', 'tbl_job_seekers.country as canidate_country', 'tbl_job_seekers.state as candaite_state', 'tbl_job_seekers.city as candiate_city', 'tbl_job_seekers.mobile as candiate_mobile', 'tbl_post_jobs.pay_min as job_pay_min', 'tbl_post_jobs.pay_max as job_pay_max', 'tbl_post_jobs.client_name as job_client_name', 'tbl_post_jobs.job_title as job_title', 'tbl_forward_candidate.expectedrate as submital_rate', 'tbl_forward_candidate.forward_by as forward_by', 'tbl_forward_candidate.forward_to as forward_to', 'tbl_forward_candidate.fullname as submittal_fullname', 'tbl_forward_candidate.visa_status as submittal_visa_status')
+			->select('tbl_job_seekers.first_name as candiate_f_name', 'tbl_job_seekers.last_name as candidate_l_name', 'tbl_job_seekers.skype_id as candidate_skype_id', 'tbl_job_seekers.country as canidate_country', 'tbl_job_seekers.state as candaite_state', 'tbl_job_seekers.city as candiate_city', 'tbl_job_seekers.mobile as candiate_mobile', 'tbl_post_jobs.pay_min as job_pay_min', 'tbl_post_jobs.pay_max as job_pay_max', 'tbl_post_jobs.client_name as job_client_name', 'tbl_post_jobs.job_title as job_title', 'tbl_forward_candidate_reference.location as referencelocation', 'tbl_forward_candidate_reference.clientName as referenceclientName', 'tbl_forward_candidate_reference.designation as referencedesignation', 'tbl_forward_candidate_reference.officialEmail as officialEmail', 'tbl_forward_candidate.expectedrate as submital_rate', 'tbl_forward_candidate.forward_by as forward_by', 'tbl_forward_candidate.forward_to as forward_to', 'tbl_forward_candidate.fullname as submittal_fullname', 'tbl_forward_candidate.visa_status as submittal_visa_status')
+			// select('tbl_forward_candidate_reference.location as referencelocation','tbl_forward_candidate_reference.clientName as referenceclientName','tbl_forward_candidate_reference.designation as referencedesignation','tbl_forward_candidate_reference.officialEmail as officialEmail','tbl_post_jobs.job_title as job_title','tbl_post_jobs.job_code as job_code','tbl_post_jobs.pay_min as job_pay_min','tbl_post_jobs.job_mode as job_mode','tbl_post_jobs.job_duration as job_duration','tbl_post_jobs.pay_max as job_pay_max','tbl_forward_candidate.expectedrate as expectedrate','tbl_forward_candidate.fullname as candiadate_name','tbl_forward_candidate.city as candidate_city','tbl_forward_candidate.state as candidate_state','tbl_forward_candidate.','tbl_forward_candidate.visa_status as visa_type')
+			->whereMonth('forward_date', '=', $date)
+			->whereIn('forward_by', $team_memeber_email)
+			->orderBy('tbl_forward_candidate.ID','DESC')
+			->get()->toArray();
+		}
 		foreach ($toReturn as $key => $value) {
 			// print_r($value);
-			$location=$value['candiate_city']." ".$value['candaite_state']." ".$value['canidate_country'];
+			$location = $value['candiate_city'] . " " . $value['candaite_state'] . " " . $value['canidate_country'];
 			$data[] = array(
 				$key + 1,
 				$value['forward_by'] ?? "",
@@ -236,17 +232,17 @@ class Import_Controller extends Controller
 				$value['candiate_mobile'] ?? "",
 				$location ?? "",
 				$value['job_pay_min'] ?? " ",
-				$value['employer_name']?? " ",
+				$value['employer_name'] ?? " ",
 				$value['emp_email_Id'] ?? " ",
 				$value['job_client_name'] ?? " ",
-				$value['submital_rate']?? " "
+				$value['submital_rate'] ?? " "
 			);
 		}
-		
+
 		// 	print_r($toReturn);
-			// exit;
+		// exit;
 		// 		return $toReturn;
-		\Excel::create('Client_Submittal_report' . $name . $date, function ($excel) use ($data) {
+		@\Excel::create('Client_Submittal_report' . $request->name . $date, function ($excel) use ($data) {
 
 			// Set the title
 			$excel->setTitle('Client_Submittal_report');
@@ -261,6 +257,5 @@ class Import_Controller extends Controller
 				// $sheet->setColumnFormat(array('I1' => '@'));
 			});
 		})->download('xls');
-		return $id;
 	}
 }

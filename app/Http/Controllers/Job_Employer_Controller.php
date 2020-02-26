@@ -536,15 +536,7 @@ class Job_Employer_Controller extends Controller
 
 
     public function view_jobs_open_today()
-
     {
-        // $toReturn[] = array();
-        // $toReturn['user_type'] = Session::get('type');
-        // $post_job_show = tbl_job_seekers::get()->toArray();
-        //     $toReturn['post_job'] = tbl_post_jobs::orderBy('ID', 'DESC')->paginate(20);
-
-        // return view('my_posted_jobs')->with('toReturn', $toReturn)->with('post_job_show', $post_job_show);
-
         ini_set('memory_limit', '-1');
         $toReturn[] = array();
         $current_module_id = 3;
@@ -743,7 +735,6 @@ class Job_Employer_Controller extends Controller
 
     public function application_delete($id = '')
     {
-
         ini_set('memory_limit', '-1');
         $employer_application_delete = Tbl_seeker_applied_for_job::where('ID', $id)->delete();
         return redirect('employer/Application');
@@ -1819,11 +1810,10 @@ class Job_Employer_Controller extends Controller
         ini_set('memory_limit', '-1');
         $toReturn['meetingall'] = tbl_meeting::where('meeting_date', '=', date('Y-m-d'))->get();
         $toReturn['interviewall'] = tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get();
-      
 
-        $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->orderBy('id', 'DESC')->paginate(15);
-        $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->orderBy('id', 'DESC')->paginate(15);
-        $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->whereDate('dated',date('Y-m-d'))->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->whereDate('dated',date('Y-m-d'))->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->whereDate('dated',date('Y-m-d'))->orderBy('id', 'DESC')->paginate(15);
         return view('calendar', compact('toReturn'));
     }
     public function todays_meetings_show()
@@ -1833,9 +1823,9 @@ class Job_Employer_Controller extends Controller
         $toReturn['interviewall'] = tbl_schedule_interview::where('interview_date', '=', date('Y-m-d'))->get();
       
 
-        $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->orderBy('id', 'DESC')->paginate(15);
-        $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->orderBy('id', 'DESC')->paginate(15);
-        $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['schedule'] = Tbl_schedule_preview::where('sts', 'rescheduled')->whereDate('dated',date('Y-m-d'))->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['rejected'] = Tbl_schedule_preview::where('sts', 'rejected')->whereDate('dated',date('Y-m-d'))->orderBy('id', 'DESC')->paginate(15);
+        $toReturn['sent'] = Tbl_schedule_preview::where('sts', 'sent')->whereDate('dated',date('Y-m-d'))->orderBy('id', 'DESC')->paginate(15);
         return view('calendar', compact('toReturn'));
     }
     public function del($id = "")

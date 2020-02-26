@@ -25,9 +25,14 @@ class teammemberSendController extends Controller
     {
         //for days
         $data_id = $id;
-        $team_memeber = tbl_team_member::where('ID', $id)->first('email');
+        $team_memeber = tbl_team_member::where('ID', $id)->first();
         $data = $team_memeber['email'];
+        $team_id=$team_memeber['team_member_type'];
         // return $data;
+        $user_type=Session::get('type');
+        // return $user_type;
+        if($user_type=="teammember")
+        {
         $user = user::where('user_id',$id)->first();
         for ($j = 0; $j < 12; $j++) {
             $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-' . $j . ' days'));
@@ -37,11 +42,8 @@ class teammemberSendController extends Controller
             $toReturn['week_report'][$j]['candidate_created'] = count(Tbl_job_seekers::whereDate('dated', $newDate[$j])->where('created_by', $id)->get());
             $toReturn['week_report'][$j]['client_submittal'] = count(Tbl_forward_candidate::whereDate('forward_date', $newDate[$j])->where('forward_by', $data)->get());
             $toReturn['week_report'][$j]['client_submittal_export'] =Tbl_forward_candidate::whereDate('forward_date', $newDate[$j])->where('forward_by', $data)->get();
-   
             $toReturn['week_report'][$j]['application_submitted'] = count(Tbl_seeker_applied_for_job::whereDate('dated', $newDate[$j])->where('submitted_by', $id)->get());
-            
         }
-
         // for months;
         $global = "";
 
@@ -57,6 +59,41 @@ class teammemberSendController extends Controller
                 $toReturn['monthly'][$i]['client_submittal_monthly1'] = count(Tbl_forward_candidate::whereMonth('forward_date', $toReturn['monthly'][$i]['month_week_one1'])->where('forward_by', $data)->get());
                 $toReturn['monthly'][$i]['application_submitted_monthly1'] = count(Tbl_seeker_applied_for_job::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->where('submitted_by', $id)->get());
                 $global = $two;
+            }
+        }
+        }
+        else
+        {
+            $user = user::where('user_id',$id)->first();
+            $team_memeber_id= tbl_team_member::where('team_member_type', $team_id)->pluck('ID');
+            $team_memeber_email= tbl_team_member::where('team_member_type', $team_id)->pluck('email');
+            $user_id = user::whereIn('user_id',$team_memeber_id)->pluck('ID');
+            for ($j = 0; $j < 12; $j++) {
+                $toReturn['week_report'][$j]['week_date'] = date('m-d-Y', strtotime('-' . $j . ' days'));
+                $toReturn['week_date_dated_us'][$j] = date('d-m-Y', strtotime('-' . $j . ' days'));
+                $newDate[$j] = date("Y-m-d", strtotime($toReturn['week_date_dated_us'][$j]));
+                $toReturn['week_report'][$j]['job_created'] = count(tbl_post_job::whereDate('dated', $newDate[$j])->whereIn('created_by', $user_id)->get());
+                $toReturn['week_report'][$j]['candidate_created'] = count(Tbl_job_seekers::whereDate('dated', $newDate[$j])->whereIn('created_by', $team_memeber_id)->get());
+                $toReturn['week_report'][$j]['client_submittal'] = count(Tbl_forward_candidate::whereDate('forward_date', $newDate[$j])->whereIn('forward_by', $team_memeber_email)->get());
+                $toReturn['week_report'][$j]['client_submittal_export'] =Tbl_forward_candidate::whereDate('forward_date', $newDate[$j])->whereIn('forward_by', $team_memeber_email)->get();
+                $toReturn['week_report'][$j]['application_submitted'] = count(Tbl_seeker_applied_for_job::whereDate('dated', $newDate[$j])->whereIn('submitted_by', $team_memeber_id)->get());
+            }
+            // for months;
+            $global = "";
+            for ($i = 0; $i < 12; $i++) {
+                if ($i == 0) {
+                    $one = date('d-m-Y');
+                    $global = $one;
+                } else {
+                    $two = date('d-m-Y', (strtotime('-30 days', strtotime($global))));
+                    $toReturn['monthly'][$i]['month_week_one1'] = $newDate = date("m-Y", strtotime($global));
+                    $toReturn['monthly'][$i]['job_created_monthly1'] = count(tbl_post_job::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->whereIn('created_by', $user_id)->get());
+                    $toReturn['monthly'][$i]['candidate_created_monthly1'] = count(Tbl_job_seekers::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->whereIn('created_by', $team_memeber_id)->get());
+                    $toReturn['monthly'][$i]['client_submittal_monthly1'] = count(Tbl_forward_candidate::whereMonth('forward_date', $toReturn['monthly'][$i]['month_week_one1'])->whereIn('forward_by', $team_memeber_email)->get());
+                    // $toReturn['monthly'][$j]['client_submittal_export'] =Tbl_forward_candidate::whereMonth('forward_date', $toReturn['monthly'][$i]['month_week_one1'])->whereIn('forward_by', $team_memeber_email)->get();
+                    $toReturn['monthly'][$i]['application_submitted_monthly1'] = count(Tbl_seeker_applied_for_job::whereMonth('dated', $toReturn['monthly'][$i]['month_week_one1'])->whereIn('submitted_by', $team_memeber_id)->get());
+                    $global = $two;
+                }
             }
         }
 // return $toReturn;

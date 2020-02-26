@@ -458,6 +458,7 @@
                                         <div > 
                                         <center>
                                             <input type="checkbox" onclick="javascript:showTable('ref_required','ref_table');" id="ref_required" name="param[]" value="reference"> &nbsp;&nbsp;&nbsp; Reference Required ?
+                                      
                                         </center>
                                             <table class="table" style="display:none;" id="ref_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
@@ -519,8 +520,8 @@
                                         <hr>
                                         <div>
                                         <center>
-                                            <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="param[]" value="Employer_required"> &nbsp;&nbsp;&nbsp;Employer Details ?
-                                        </center>
+                                           <input type="checkbox" onclick="javascript:showTable('Employer_table','emp_table');" id="Employer_table" name="param[]" value="Employer_required"> &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;Employer Details ?
+                                            </center>
                                             <table class="table" style="display:none;" id="emp_table" cellspacing="0" style="border: 1Px solid;width: 40%!important;">
                                                 <thead>
                                                     <tr style="background: #317eeb;">
@@ -549,7 +550,7 @@
                                         <hr>
                                         <div>
                                         <center>
-                                            <input   style="text-align: center;" type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="param[]" id="attachment_required" value="attachment_required"> &nbsp;&nbsp;&nbsp; Attachment Required ?
+                                            <input  style="text-align: center;" type="checkbox" onclick="javascript:showTable('attachment_required','attach_table');" name="param[]" id="attachment_required" value="attachment_required"> &nbsp; Attachment Required ?
                                         </center>
                                             <table class="table" style="display:none;" id="attach_table" cellspacing="0" style="border: 1Px solid;width: 40%;!important">
                                                 <thead>
